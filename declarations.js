@@ -8,9 +8,9 @@ const obj = Object.freeze({
 })
 const nested = Object.freeze({
     arr : [4, undefined, '2'],
-    obj : {
+    obj : Object.freeze({
         str : "zboubynueve",
         num : 7,
         bool : true,
-    }
+    })
 })
