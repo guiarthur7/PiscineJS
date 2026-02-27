@@ -1,9 +1,3 @@
-const person = {
-  name: "Rick",
-  age: 78,
-  country: "US",
-};
-
 // clone1: A copy that won't change when person changes
 const clone1 = { ...person };
 
