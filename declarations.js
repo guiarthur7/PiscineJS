@@ -5,7 +5,6 @@ const obj = Object.freeze({
     num : 7,
     bool : true,
     undef : undefined,
-    nested : nested,
 })
 const nested = Object.freeze({
     arr : [4, undefined, '2'],
