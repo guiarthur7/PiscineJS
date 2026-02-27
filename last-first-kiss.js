@@ -3,9 +3,9 @@ function first(n){
 }
 
 function last(n) {
-    return n[n.length]
+    return n[n.length - 1]
 }
 
 function kiss(n) {
-    return [n[n.length], n[0]]
+    return [n[n.length - 1], n[0]]
 }
