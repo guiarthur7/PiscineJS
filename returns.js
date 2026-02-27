@@ -1,4 +1,4 @@
-function idd(n) {
+function id(n) {
     return n
 }
 
