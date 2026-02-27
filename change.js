@@ -3,5 +3,5 @@ function get(key) {
 }
 
 function set(key, n) {
-    sourceObject.key = n
+    return sourceObject.key = n
 }
