@@ -9,6 +9,9 @@ function words(s) {
             str += s[i]
         }
     }
+    if (str.length > 0) {
+        tab.push(str)
+    }
     return tab
 }
 
