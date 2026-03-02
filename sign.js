@@ -11,7 +11,7 @@ function sign(n) {
 function sameSign(n1, n2) {
     let a = sign(n1)
     let b = sign(n2)
-    if (n1 === n2) {
+    if (a === b) {
         return true
     } else {
         return false
