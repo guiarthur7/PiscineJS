@@ -35,6 +35,6 @@ function whisper(s) {
 
 function capitalize(s) {
     let res = ""
-    res += s[1].toUpperCase() + s.slice(1).toLowerCase()
+    res += s[0].toUpperCase() + s.slice(1).toLowerCase()
     return res
 }
