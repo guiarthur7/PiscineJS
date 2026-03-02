@@ -17,9 +17,10 @@ function words(s) {
 
 function sentence(tab) {
     let res = ""
-    for (let i = 0; i < tab.length; i++) {
+    for (let i = 0; i < tab.length - 1; i++) {
         res += tab[i] + " "
     }
+    res += tab[tab.length]
     return res
 }
 
