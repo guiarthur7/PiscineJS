@@ -1,4 +1,4 @@
-function word(s) {
+function words(s) {
     let tab = []
     let str = ""
     for (let i = 0; i < s.Length - 1; i++) {
