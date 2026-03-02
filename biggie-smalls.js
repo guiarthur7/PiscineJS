@@ -1,3 +1,3 @@
-const smalls = Number.MIN_VALUE
+const smalls = -Infinity
 
-const biggie = Number.MAX_VALUE
+const biggie = Infinity
