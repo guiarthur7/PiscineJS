@@ -1,7 +1,9 @@
 function blockChain(data, prev = {index: 0, hash: '0'}) {
+    const index = prev.index + 1;
+    const hash = hashCode(prev.hash + index + JSON.stringify(data));
     const obj = {
-        index: prev.index + 1,
-        hash: hashCode(prev.hash + prev.index + JSON.stringify(data)),
+        index: index,
+        hash: hash,
         data: data,
         prev: prev,
         chain: function(nextData) {
