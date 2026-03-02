@@ -25,7 +25,7 @@ function sentence(tab) {
 }
 
 function yell(s) {
-    return s.ToLowerCase()
+    return s.ToUpperCase()
 }
 
 function whisper(s) {
