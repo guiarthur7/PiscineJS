@@ -10,8 +10,3 @@ function blockChain(data, prev = {index: 0, hash: '0'}) {
     };
     return obj;
 }
-
-const hashCode = (str) =>
-  (
-    [...str].reduce((h, c) => (h = (h << 5) - h + c.charCodeAt(0)) & h, 0) >>> 0
-  ).toString(36);
