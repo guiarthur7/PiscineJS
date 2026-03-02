@@ -6,7 +6,7 @@ function words(s) {
             tab.push(str)
             str = ""
         } else {
-            str = str + s[i]
+            str += s[i]
         }
     }
     return tab
