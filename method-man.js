@@ -20,7 +20,7 @@ function sentence(tab) {
     for (let i = 0; i < tab.length - 1; i++) {
         res += tab[i] + " "
     }
-    res += tab[tab.length]
+    res += tab[tab.length - 1]
     return res
 }
 
