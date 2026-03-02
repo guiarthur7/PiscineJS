@@ -1,7 +1,9 @@
 function repeat(s, n) {
-    let res = ""
-    for (let i = 0; i < n; i++) {
+    if (n === 0) {
+        return 0
+    } else {
+        let res = ""
         res += s
+        return repeat(res, n-1)
     }
-    return res
 }
