@@ -1,7 +1,7 @@
 function words(s) {
     let tab = []
     let str = ""
-    for (let i = 0; i < s.Length - 1; i++) {
+    for (let i = 0; i < s.length; i++) {
         if (s[i] == " ") {
             tab.push(str)
             str = ""
@@ -14,7 +14,7 @@ function words(s) {
 
 function sentence(tab) {
     let res = ""
-    for (let i = 0; i < tab.Length -1; i++) {
+    for (let i = 0; i < tab.length -1; i++) {
         res += tab[i] + " "
     }
     return res
