@@ -29,12 +29,12 @@ function yell(s) {
 }
 
 function whisper(s) {
-    res = s.toLowerCase()
+    let res = s.toLowerCase()
     return "*" + res + "*"
 }
 
 function capitalize(s) {
-    res = ""
+    let res = ""
     res += s[1].toUpperCase() + s.slice(1).toLowerCase()
     return res
 }
