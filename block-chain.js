@@ -1,15 +1,7 @@
-const hashCode = (str) => {
-    return [...str].reduce((hash, char) => {
-        const chr = char.charCodeAt(0);
-        hash = ((hash << 5) - hash) + chr;
-        return hash & hash;
-    }, 0);
-};
-
 function blockChain(data, prev = {index: 0, hash: '0'}) {
     const obj = {
         index: prev.index + 1,
-        hash: hashCode(prev.hash + prev.index + JSON.stringify(data)).toString(16),
+        hash: hashCode(prev.hash + prev.index + JSON.stringify(data)),
         data: data,
         prev: prev,
         chain: function(nextData) {
@@ -18,3 +10,8 @@ function blockChain(data, prev = {index: 0, hash: '0'}) {
     };
     return obj;
 }
+
+const hashCode = (str) =>
+  (
+    [...str].reduce((h, c) => (h = (h << 5) - h + c.charCodeAt(0)) & h, 0) >>> 0
+  ).toString(36);
