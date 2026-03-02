@@ -25,16 +25,16 @@ function sentence(tab) {
 }
 
 function yell(s) {
-    return s.ToUpperCase()
+    return s.toUpperCase()
 }
 
 function whisper(s) {
-    res = s.ToLowerCase()
+    res = s.toLowerCase()
     return "*" + res + "*"
 }
 
 function capitalize(s) {
     res = ""
-    res += s[1].ToUpperCase() + s.slice(1).ToLowerCase()
+    res += s[1].toUpperCase() + s.slice(1).toLowerCase()
     return res
 }
