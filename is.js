@@ -3,7 +3,7 @@ is.num = function(n) {
 }
 
 is.nan = function(n) {
-    return isNaN(n);
+    return Number.isNaN(n);
 }
 
 is.str = function(s) {
