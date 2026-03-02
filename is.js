@@ -1,45 +1,43 @@
-const is = {
-    num(n) {
-        return typeof n === 'number' && !isNaN(n);
-    },
-    
-    nan(n) {
-        return isNaN(n);
-    },
-    
-    str(s) {
-        return typeof s === 'string';
-    },
-    
-    bool(b) {
-        return typeof b === 'boolean';
-    },
-    
-    undef(value) {
-        return value === undefined;
-    },
-    
-    def(value) {
-        return value !== undefined;
-    },
-    
-    arr(value) {
-        return Array.isArray(value);
-    },
-    
-    obj(value) {
-        return typeof value === 'object' && value !== null && !Array.isArray(value);
-    },
-    
-    fun(value) {
-        return typeof value === 'function';
-    },
-    
-    truthy(value) {
-        return !!value;
-    },
-    
-    falsy(value) {
-        return !value;
-    }
-};
+is.num = function(n) {
+    return typeof n === 'number' && !isNaN(n);
+}
+
+is.nan = function(n) {
+    return isNaN(n);
+}
+
+is.str = function(s) {
+    return typeof s === 'string';
+}
+
+is.bool = function(b) {
+    return typeof b === 'boolean';
+}
+
+is.undef = function(value) {
+    return value === undefined;
+}
+
+is.def = function(value) {
+    return value !== undefined;
+}
+
+is.arr = function(value) {
+    return Array.isArray(value);
+}
+
+is.obj = function(value) {
+    return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+is.fun = function(value) {
+    return typeof value === 'function';
+}
+
+is.truthy = function(value) {
+    return !!value;
+}
+
+is.falsy = function(value) {
+    return !value;
+}
