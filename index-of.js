@@ -1,9 +1,13 @@
-function indexOf(tab, val) {
-    let i = 0
+function indexOf(tab, val, fromindex) {
+    let i = fromindex
     while (tab[i] != val) {
         i++
     }
-    return i
+    if (i === 0) {
+        return -1
+    } else {
+        return i
+    }
 }
 
 function lastIndexOf(tab, val) {
