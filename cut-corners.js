@@ -1,4 +1,8 @@
 function trunc(x) {
+    if (x === Infinity) return Infinity;
+    if (x === -Infinity) return -Infinity;
+    if (x !== x) return NaN;
+    
     if (x >= 0) {
         let i = 0;
         while (i + 1 <= x) {
@@ -15,6 +19,10 @@ function trunc(x) {
 }
 
 function floor(x) {
+    if (x === Infinity) return Infinity;
+    if (x === -Infinity) return -Infinity;
+    if (x !== x) return NaN;
+    
     if (x >= 0) {
         let i = 0;
         while (i + 1 <= x) {
@@ -31,6 +39,10 @@ function floor(x) {
 }
 
 function ceil(x) {
+    if (x === Infinity) return Infinity;
+    if (x === -Infinity) return -Infinity;
+    if (x !== x) return NaN;
+    
     if (x >= 0) {
         let i = 0;
         while (i < x) {
