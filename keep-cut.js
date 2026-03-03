@@ -11,5 +11,13 @@ function cutFirstLast(s) {
 }
 
 function keepFirst(s) {
-    
+    return s.slice(0, 2)
+}
+
+function keepLast(s) {
+    return s.slice(s.length-2, s.length)
+}
+
+function keepFirstLast(s) {
+    return  s.slice(0, 2) + s.slice(s.length-2, s.length)
 }
