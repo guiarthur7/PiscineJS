@@ -1,49 +1,51 @@
 function trunc(x) {
     if (x >= 0) {
-        let i = 0;
-        while (i + 1 <= x) {
-            i++;
+        if (x < 1) return 0;
+        
+        // Créer des puissances de 2 : [1, 2, 4, 8, 16, ...]
+        let powers = [1];
+        while (powers[powers.length - 1] + powers[powers.length - 1] <= x) {
+            powers.push(powers[powers.length - 1] + powers[powers.length - 1]);
         }
-        return i;
+        
+        // Construire le résultat avec les puissances
+        let result = 0;
+        for (let i = powers.length - 1; i >= 0; i--) {
+            while (result + powers[i] <= x) {
+                result = result + powers[i];
+            }
+        }
+        return result;
     } else {
-        let i = 0;
-        while (i - 1 >= x) {
-            i--;
+        if (x > -1) return 0;
+        
+        let powers = [1];
+        while (powers[powers.length - 1] + powers[powers.length - 1] <= -x) {
+            powers.push(powers[powers.length - 1] + powers[powers.length - 1]);
         }
-        return i;
+        
+        let result = 0;
+        for (let i = powers.length - 1; i >= 0; i--) {
+            while (result - powers[i] >= x) {
+                result = result - powers[i];
+            }
+        }
+        return result;
     }
 }
 
 function floor(x) {
-    if (x >= 0) {
-        let i = 0;
-        while (i + 1 <= x) {
-            i++;
-        }
-        return i;
-    } else {
-        let i = 0;
-        while (i > x) {
-            i--;
-        }
-        return i;
-    }
+    let t = trunc(x);
+    if (x === t) return t;
+    if (x > 0) return t;
+    return t - 1;
 }
 
 function ceil(x) {
-    if (x >= 0) {
-        let i = 0;
-        while (i < x) {
-            i++;
-        }
-        return i;
-    } else {
-        let i = 0;
-        while (i - 1 >= x) {
-            i--;
-        }
-        return i;
-    }
+    let t = trunc(x);
+    if (x === t) return t;
+    if (x > 0) return t + 1;
+    return t;
 }
 
 function round(x) {
