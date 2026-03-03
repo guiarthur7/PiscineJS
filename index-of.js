@@ -3,7 +3,7 @@ function indexOf(tab, val) {
     while (tab[i] != val) {
         i++
     }
-    return i+1
+    return i
 }
 
 function lastIndexOf(tab, val) {
