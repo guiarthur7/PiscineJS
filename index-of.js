@@ -1,9 +1,9 @@
-function indexOf(tab, val, fromindex) {
+function indexOf(tab, val, fromindex = 0) {
     let i = fromindex
-    while (tab[i] != val) {
+    while (tab[i] != val && i < tab.length) {
         i++
     }
-    if (i === 0) {
+    if (i >= tab.length) {
         return -1
     } else {
         return i
@@ -11,13 +11,15 @@ function indexOf(tab, val, fromindex) {
 }
 
 function lastIndexOf(tab, val) {
-    let index = 0
-    for (let i = 0; i < tab.length; i++) {
-        if (tab[i] === val) {
-            index = i
-        }
+    let i = tab.length - 1
+    while(tab[i] != val && i >= 0) {
+        i--
     }
-    return index
+    if (i < 0) {
+        return -1
+    } else {
+        return i
+    }
 }
 
 function includes(tab, val) {
