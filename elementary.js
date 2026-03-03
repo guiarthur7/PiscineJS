@@ -48,5 +48,5 @@ function modulo(a, b) {
     while (a > b) {
         a -= b
     }
-    return a
+    return b
 }
