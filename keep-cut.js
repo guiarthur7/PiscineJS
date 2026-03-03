@@ -19,5 +19,9 @@ function keepLast(s) {
 }
 
 function keepFirstLast(s) {
-    return  s.slice(0, 2) + s.slice(s.length-2, s.length)
+    if (s.length >= 4) {
+        return  s.slice(0, 2) + s.slice(s.length-2, s.length)
+    } else {
+        return s
+    }
 }
