@@ -45,8 +45,26 @@ function divide(a, b) {
 }
 
 function modulo(a, b) {
-    while (a >= b) {
-        a -= b
+    if (b > 0) {
+        if (a > 0) {
+            while (a >= b) {
+                a -= b
+            }
+        } else if (a < 0) {
+            while (a < 0) {
+                a += b
+            }
+        }
+    } else if (b < 0) {
+        if (a > 0) {
+            while (a > 0) {
+                a += b
+            }
+        } else if (a < 0) {
+            while (a <= b) {
+                a -= b
+            }
+        }
     }
     return a
 }
