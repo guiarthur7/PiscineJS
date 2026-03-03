@@ -57,9 +57,9 @@ function modulo(a, b) {
         }
     } else if (b < 0) {
         if (a > 0) {
-            while (a > 0) {
-                a += b
-            }
+            while (a >= -b) {  // Tant que a >= valeur absolue de b
+                a += b         // On soustrait la valeur absolue
+            } 
         } else if (a < 0) {
             while (a <= b) {
                 a -= b
