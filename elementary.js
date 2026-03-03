@@ -4,11 +4,11 @@ function multiply(a, b) {
         return 0
     } if (a < 0 && b > 0) {
         for (let i = 0; i <b; i++) {
-            res += -a
+            res += a
         }
     } if (a > 0 && b < 0) {
         for (let i = 0; i <a; i++) {
-            res += -b
+            res += b
         }
     } if (a < 0 && b < 0) {
         for (let i = 0; i < -a; i++) {
