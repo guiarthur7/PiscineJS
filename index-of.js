@@ -10,7 +10,7 @@ function indexOf(tab, val, fromindex = 0) {
     }
 }
 
-function lastIndexOf(tab, val, fromindex = 0) {
+function lastIndexOf(tab, val, fromindex = tab.length) {
     let i = fromindex
     while(tab[i] != val && i >= 0) {
         i--
