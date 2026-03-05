@@ -20,9 +20,7 @@ function split(s, j) {
             s1 += s[i]
         }
     }
-    if (s1.length > 0) {
-        res.push(s1)
-    }
+    res.push(s1)
     return res
 }
 
