@@ -1,10 +1,13 @@
 function pyramid(s, h) {
     let res = ""
-    for (let i = 0; i <= h; i++) {
-        if (i === h) {
-            res += s.repeat(2*i-1)
+    let space = " "
+    for (let i = 1; i <= h; i++) {
+        res += space.repeat(h-i) + s.repeat(2*i-1)
+        if (i !== h) {
+            res += '\n'
         }
-        res += s.repeat(2*i-1) + '\n'
     }
     return res
 }
+
+console.log(pyramid("*", 5));
