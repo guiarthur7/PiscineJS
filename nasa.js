@@ -11,5 +11,5 @@ function nasa(n) {
             res += String(i) + " "
         }
     }
-    return res
+    return res.slice(0, res.length - 1)
 }
