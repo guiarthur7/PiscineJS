@@ -1,13 +1,14 @@
 function nasa(n) {
     let res = ""
-    let s = String(n)
-    for (let i = 0; i < s.length; i++) {
-        if (number(s[i]%5 === 0 && number(s[i]%3 === 0))) {
+    for (let i = 0; i <= n; i++) {
+        if (i%5 === 0 && i%3 === 0) {
             res += "NASA"
-        } else if (number(s[i]%3 === 0)) {
+        } else if (i%3 === 0) {
             res += "NA"
-        } else if (number(s[i]%5 === 0)) {
+        } else if (i%5 === 0) {
             res += "SA"
+        } else {
+            res += String(i)
         }
     }
     return res
