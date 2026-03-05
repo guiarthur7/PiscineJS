@@ -15,6 +15,7 @@ function split(s, j) {
         for (let i=0; i<s.length;i++) {
             res.push(s[i])
         }
+        return res
     }
     for (let i = 0; i <= sl; i++) {
         if (s.slice(i, i+jl) === j) {
