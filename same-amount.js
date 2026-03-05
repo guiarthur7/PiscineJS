@@ -1,9 +1,6 @@
 function sameAmount(s, r1, r2) {
-    let matches1 = s.match(r1)
-    let matches2 = s.match(r2)
-    
-    let count1 = matches1 ? matches1.length : 0
-    let count2 = matches2 ? matches2.length : 0
+    let count1 = (s.match(new RegExp(r1.source, 'g')) || []).length
+    let count2 = (s.match(new RegExp(r2.source, 'g')) || []).length
     
     return count1 === count2
 }
