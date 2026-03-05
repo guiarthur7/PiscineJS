@@ -9,11 +9,13 @@ function join(s, j = ",") {
 function split(s, j) {
     let res = []
     let s1 = ""
-    for (let i = 0; i < s.length; i++) {
-        if (s.slice(i, i + j.length) === j) {
+    let jl = j.length
+    let sl = s.length - 1
+    for (let i = 0; i <= sl; i++) {
+        if (s.slice(i, i+jl) === j) {
             res.push(s1)
             s1 = ""
-            i += j.length - 1
+            i += jl - 1
         } else {
             s1 += s[i]
         }
@@ -23,3 +25,6 @@ function split(s, j) {
     }
     return res
 }
+
+console.log(split("salut frero je mapelle arthur", " "))
+console.log(split("salut - je - mapelle - arthur", " - "))
