@@ -1,5 +1,5 @@
 function dogYears(planet, age) {
-    const earthYear = 31557600; // secondes par année terrestre
+    const earthYear = 31557600;
     let orbitalPeriod;
     
     if (planet === "earth") {
