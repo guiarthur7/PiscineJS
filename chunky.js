@@ -8,7 +8,7 @@ function chunk(tab, d) {
             d1 += 1
         } else {
             res.push(tab2)
-            tab2 = [tab[i]s]
+            tab2 = [tab[i]]
             d1 = 1
         }
     }
