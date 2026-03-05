@@ -10,9 +10,10 @@ function split(s, j) {
     let res = []
     let s1 = ""
     for (let i = 0; i < s.length; i++) {
-        if (s[i] === j) {
+        if (s.slice(i, i + j.length) === j) {
             res.push(s1)
             s1 = ""
+            i += j.length - 1
         } else {
             s1 += s[i]
         }
