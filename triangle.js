@@ -4,7 +4,11 @@ function triangle(s, h) {
         return ""
     } else {
         for (let i = 1; i <= h; i++) {
-            res += s.repeat(i) + "\n"
+            if (i === h) {
+                res += s.repeat(i)
+            } else {
+                res += s.repeat(i) + "\n"
+            }
         }
         return res
     } 
