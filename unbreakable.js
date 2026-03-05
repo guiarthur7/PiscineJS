@@ -1,5 +1,5 @@
 function join(s, j = ",") {
-    res = s[0]
+    let res = s[0]
     for (let i=1; i < s.length; i++) {
         res += j + s[i]
     }
@@ -32,3 +32,4 @@ function split(s, j) {
 
 console.log(split("salut frero je mapelle arthur", " "))
 console.log(split("salut - je - mapelle - arthur", " - "))
+console.log(join(['ee', 'ff', 'g', ''], ','))
