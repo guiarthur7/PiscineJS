@@ -47,4 +47,17 @@ function isFuture(d) {
     }
 }
 
+function isPast(d) {
+    if (isValid(d)) {
+        if (typeof d === "number") {
+            return d - Date.now() < 0
+        }
+        if (d.getTime() - Date.now() < 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+}
+
 console.log(isAfter(123123, 526))
