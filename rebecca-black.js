@@ -26,7 +26,7 @@ function isLeapYear(date) {
 function isLastDayOfMonth(date) {
     let nextDay = new Date(date);
     nextDay.setDate(date.getDate() + 1);
-    if (nextDay.getMonth() === date.getMonth() + 1) {
+    if (nextDay.getMonth() !== date.getMonth()) {
         return true
     } else {
         return false
@@ -35,3 +35,4 @@ function isLastDayOfMonth(date) {
 
 console.log(isLastDayOfMonth(new Date("2024-02-29"))); // true
 console.log(isLastDayOfMonth(new Date("2024-02-28"))); // false
+console.log(isLastDayOfMonth(new Date('2020-12-31')))
