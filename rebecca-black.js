@@ -5,3 +5,11 @@ function isFriday(date) {
         return false
     }
 }
+
+function isWeekend(date) {
+    if (date.getDay() === 6 ||date.getDay() === 7) {
+        return true
+    } else {
+        return false
+    }
+}
