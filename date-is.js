@@ -8,4 +8,12 @@ function isValid(date) {
     return false;
 }
 
+function isAfter(d1, d2) {
+    if (d1.getTime() - d2.getTime() > 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
 console.log(isValid(Date.now()))
