@@ -1,5 +1,5 @@
 function isValid(date) {
-    if (!isNaN(date.getTime())) {
+    if (date instanceof Date && !isNaN(date.getTime())) {
         return true
     } else {
         return false
