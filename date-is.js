@@ -5,3 +5,5 @@ function isValid(date) {
         return false
     }
 }
+
+console.log(isValid(Date.now()))
