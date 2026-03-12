@@ -34,4 +34,12 @@ function isBefore(d1, d2) {
     }
 }
 
+function isFuture(d) {
+    if (d.getTime() - Date.now() > 0) {
+        return true
+    } else {
+        return false
+    }
+}
+
 console.log(isAfter(123123, 526))
