@@ -1,31 +1,27 @@
 function firstDayWeek(n, s) {
-    var d = new Date(s + "-01-01");
-    if (n === 1) {
-        var dd = d.getDate();
-        if (dd < 10) dd = '0' + dd;
-        var mm = d.getMonth() + 1;
-        if (mm < 10) mm = '0' + mm;
-        var yyyy = d.getFullYear();
-        return dd + '-' + mm + '-' + yyyy;
-    }
-    var day = d.getDay();
-    var offset;
+    const d = new Date(s + "-01-01")
+    const day = d.getDay()
+    let diff = 0
     if (day === 0) {
-        offset = 1;
+        diff = 1
+    } if (day === 1) {
+        diff = 0
     } else {
-        offset = 8 - day;
+        diff = 7 - day
     }
-    var firstMonday = new Date(d);
-    firstMonday.setDate(d.getDate() + offset - 1);
-    var mondayN = new Date(firstMonday);
-    mondayN.setDate(firstMonday.getDate() + 7 * (n - 1));
-    if (mondayN.getFullYear() < Number(s)) {
-        mondayN = d;
+    if (n === 1) {
+        let m = d.getMonth() + 1
+        if (m < 10) {m = '0' + m}
+        let d1 = d.getDate()
+        if (d1 < 10) {d1 = '0' + d1}
+        return d1 + "-" + m + "-" + s
     }
-    var dd = mondayN.getDate();
-    if (dd < 10) dd = '0' + dd;
-    var mm = mondayN.getMonth() + 1;
-    if (mm < 10) mm = '0' + mm;
-    var yyyy = mondayN.getFullYear();
-    return dd + '-' + mm + '-' + yyyy;
+    let lundi = new Date(d);
+    lundi.setDate(d.getDate() + diff + 7 * (n - 2));
+
+    let m1 = lundi.getMonth() + 1
+    if (m1<10) {m1 = '0' + m1}
+    let d2 = lundi.getDate()
+    if (d2<10) {d2 = '0' + d2}
+    return d2 + "-" + m1 + "-" + s
 }
