@@ -1,8 +1,6 @@
 function isValid(date) {
     if (date instanceof Date) {
-        return true
-^C
-    } if (!isNaN(date.getTime())) {
+        if (!isNaN(date.getTime())) {
         return true
     } else {
         return false
