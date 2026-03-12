@@ -22,3 +22,16 @@ function isLeapYear(date) {
         return false
     }
 }
+
+function isLastDayOfMonth(date) {
+    let nextDay = new Date(date);
+    nextDay.setDate(date.getDate() + 1);
+    if (nextDay.getMonth() === date.getMonth() + 1) {
+        return true
+    } else {
+        return false
+    }
+}
+
+console.log(isLastDayOfMonth(new Date("2024-02-29"))); // true
+console.log(isLastDayOfMonth(new Date("2024-02-28"))); // false
