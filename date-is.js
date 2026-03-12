@@ -21,7 +21,7 @@ function isAfter(d1, d2) {
     }
 }
 
-function isBefor(d1, d2) {
+function isBefore(d1, d2) {
     if (isValid(d1) && isValid(d2)) {
         if (typeof d1 === "number" && typeof d2 === "number") {
             return d1 - d2 < 0
