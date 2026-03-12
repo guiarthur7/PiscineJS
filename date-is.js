@@ -35,10 +35,15 @@ function isBefore(d1, d2) {
 }
 
 function isFuture(d) {
-    if (d.getTime() - Date.now() > 0) {
-        return true
-    } else {
-        return false
+    if (isValid(d)) {
+        if (typeof d === "number") {
+            return d - Date.now() > 0
+        }
+        if (d.getTime() - Date.now() > 0) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
