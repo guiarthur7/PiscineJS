@@ -10,11 +10,7 @@ function firstDayWeek(n, s) {
         diff = 8 - day
     }
     if (n === 1) {
-        let m = d.getMonth() + 1
-        if (m < 10) {m = '0' + m}
-        let d1 = d.getDate()
-        if (d1 < 10) {d1 = '0' + d1}
-        return d1 + "-" + m + "-" + s
+        return "01-01-" + s
     }
     let lundi = new Date(d);
     lundi.setDate(d.getDate() + diff + 7 * (n - 2));
