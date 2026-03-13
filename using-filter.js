@@ -5,7 +5,7 @@ function filterShortStateName(tab) {
 console.log(filterShortStateName(["Salutcarthur", "aa"]))
 
 function filterStartVowel(tab) {
-    return tab.filter(word => word[0] === "a" || word[0] === "e" || word[0] === "i" || word[0] === "o" || word[0] === "u")
+    return tab.filter(word => word[0] !== "a" || word[0] !== "e" || word[0] !== "i" || word[0] !== "o" || word[0] !== "u")
 }
 
 console.log(filterStartVowel(["aaaa", "ccc"]))
