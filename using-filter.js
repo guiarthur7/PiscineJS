@@ -1,0 +1,45 @@
+function filterShortStateName(tab) {
+    return tab.filter(word => word.length > 7)
+}
+
+console.log(filterShortStateName(["Salutcarthur", "aa"]))
+
+function filterStartVowel(tab) {
+    return tab.filter(word => word[0] === "a" || word[0] === "e" || word[0] === "i" || word[0] === "o" || word[0] === "u")
+}
+
+console.log(filterStartVowel(["aaaa", "ccc"]))
+
+function filter5Vowels(tab) {
+    return tab.filter(word => {
+        let cpt = 0
+        for (let i = 0; i < word.length; i ++) {
+            if (word[i] === "a" || word[i] === "e" || word[i] === "i" || word[i] === "o" || word[i] === "u") {
+                cpt +=1
+            }
+        }
+        return cpt >=5
+    })
+}
+
+console.log(filter5Vowels(["Salutcarthur", "aaeiouaaaaa"]))
+
+function filter1DistinctVowel(tab) {
+    return tab.filter(word => {
+        let str = ""
+        for (let i = 0; i < word.length; i ++) {
+            if (word[i] === "a" || word[i] === "e" || word[i] === "i" || word[i] === "o" || word[i] === "u") {
+                str += word[i]
+            }
+        }
+        let str2 = str[0]
+        for (let x = 1; x <str.length; x++) {
+            if (str[x] !== str2) {
+                return false
+            }
+        }
+        return true
+    })
+}
+
+console.log(filter1DistinctVowel(["Alabama", "arthur", "aAaAaaAaAa", "aoifnaofnaf"]))
