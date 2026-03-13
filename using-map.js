@@ -31,12 +31,23 @@ function trimTemp(tab) {
 function tempForecasts(tab) {
   return tab.map(({ city, temperature, state }) => {
     const celsius = fahrenheitToCelsius([temperature])[0].replace('°C', '°Celsius');
-    const stateCap = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase();
+    const stateCap = state.split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
     return `${celsius} in ${city}, ${stateCap}`;
   });
 }
 
 console.log(fahrenheitToCelsius(["68°F", "59°F", "25°F"]))
+
+console.log(tempForecasts([
+  {
+    city: "Pasadena",
+    temperature: " 101 °F",
+    state: "new Mexico",
+    region: "West",
+  },
+]))
 
 console.log(trimTemp([
   { city: "Los Angeles", temperature: "  101 °F   " },
