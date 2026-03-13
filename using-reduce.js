@@ -1,8 +1,8 @@
-function funcExec(arr, init) {
+function funcExec(arr, init = 0) {
     return arr.reduce((acc, fn) => fn(acc), init);
 }
 
-function sumOrMul(arr, init) {
+function sumOrMul(arr, init = 0) {
     return arr.reduce((acc, n) => n % 2 === 0 ? acc * n : acc + n, init);
 }
 
