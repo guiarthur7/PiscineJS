@@ -1,4 +1,4 @@
-function longWord(tab) {
+function longWords(tab) {
     return tab.every(word => word.length >= 5)
 }
 
