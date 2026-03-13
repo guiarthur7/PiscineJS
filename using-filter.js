@@ -5,10 +5,8 @@ function filterShortStateName(tab) {
 console.log(filterShortStateName(["Salutcarthur", "aa"]))
 
 function filterStartVowel(tab) {
-    return tab.filter(word => "aeiou".includes(word[0]))
+    return tab.filter(word => "aeiou".includes(word[0].toLowerCase()));
 }
-
-console.log(filterStartVowel(["aaaa", "ccc"]))
 
 function filter5Vowels(tab) {
     return tab.filter(word => {
