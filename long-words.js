@@ -2,8 +2,8 @@ function longWords(tab) {
     return tab.every(word => word.length >= 5)
 }
 
-console.log(longWord(["IFBUAUFAUZFAFUI", "AIOZFBOAUFBAUOFBAOUFB"]))
-console.log(longWord(["FUI", "FB"]))
+console.log(longWords(["IFBUAUFAUZFAFUI", "AIOZFBOAUFBAUOFBAOUFB"]))
+console.log(longWords(["FUI", "FB"]))
 
 function oneLongWord(tab) {
     return tab.some(word => word.length >= 10)
