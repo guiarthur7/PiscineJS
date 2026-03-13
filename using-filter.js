@@ -41,3 +41,9 @@ function filter1DistinctVowel(tab) {
 }
 
 console.log(filter1DistinctVowel(["Alabama", "arthur", "aAaAaaAaAa", "aoifnaofnaf"]))
+
+function multiFilter(tab) {
+    return tab.filter(({capital, name, tag, region }) => {
+        return capital.length >= 8 && "zrtypqsdfghjklmwxcvbn".includes(name[0].toLowerCase()) && "aeiou".includes(tag) && region !== "South"
+    })
+}
