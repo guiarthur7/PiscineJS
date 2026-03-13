@@ -8,8 +8,8 @@ function sumOrMul(arr, init) {
 
 console.log(sumOrMul([1, 2, 3, 5, 8], 5));
 
-function adder(tab) {
-    return tab.reduce((add, val) => add + val)
+function adder(tab, init) {
+    return tab.reduce((add, val) => add + val, init)
 }
 
 console.log(adder([1,2,7]))
