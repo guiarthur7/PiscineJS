@@ -27,7 +27,7 @@ function filter1DistinctVowel(tab) {
         let str = ""
         for (let i = 0; i < word.length; i ++) {
             if (word[i].toLowerCase() === "a" || word[i].toLowerCase() === "e" || word[i].toLowerCase() === "i" || word[i].toLowerCase() === "o" || word[i].toLowerCase() === "u") {
-                str += word[i]
+                str += word[i].toLowerCase()
             }
         }
         let str2 = str[0]
