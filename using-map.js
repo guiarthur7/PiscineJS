@@ -22,10 +22,10 @@ function upperCasingStates(tab) {
 }
 
 function trimTemp(tab) {
-    return tab.map(({ city, temperature }) => ({
+    return tab.map(({ city, temperature }) => ([{
         city: city,
         temperature: temperature.replace(/\s+/g, "")
-    }));
+    }]));
 }
 
 function tempForecasts(tab) {
