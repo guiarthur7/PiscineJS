@@ -1,3 +1,12 @@
+function fahrenheitToCelsius(tab) {
+  return tab.map(str => {
+    str.replace(/°F/g, "")
+    const f = parseFloat(str);
+    const c = Math.floor((f - 32) * 5 / 9);
+    return c + '°C';
+  });
+}
+
 function citiesOnly(tab) {
     const cities = tab.map(obj => obj.city)
     return cities
@@ -20,21 +29,14 @@ function trimTemp(tab) {
 }
 
 function tempForecasts(tab) {
-  return tab.map(({ city, temperature, state, region }) => {
-    const tempF = parseFloat(temperature.replace(/[^0-9.\-]/g, ""));
-    const tempC = ((tempF - 32) * 5 / 9).toFixed(1);
-    return `${tempC}°Celsius in ${city}, ${state}`;
+  return tab.map(({ city, temperature, state }) => {
+    const celsius = fahrenheitToCelsius([temperature])[0].replace('°C', '°Celsius');
+    const stateCap = state.charAt(0).toUpperCase() + state.slice(1);
+    return `${celsius} in ${city}, ${stateCap}`;
   });
 }
 
-console.log(tempForecasts([
-  {
-    city: "Pasadena",
-    temperature: " 101 °F",
-    state: "california",
-    region: "West",
-  },
-]));
+console.log(fahrenheitToCelsius(["68°F", "59°F", "25°F"]))
 
 console.log(trimTemp([
   { city: "Los Angeles", temperature: "  101 °F   " },
