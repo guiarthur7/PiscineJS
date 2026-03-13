@@ -31,7 +31,7 @@ function trimTemp(tab) {
 function tempForecasts(tab) {
   return tab.map(({ city, temperature, state }) => {
     const celsius = fahrenheitToCelsius([temperature])[0].replace('°C', '°Celsius');
-    const stateCap = state.charAt(0).toUpperCase() + state.slice(1);
+    const stateCap = state.charAt(0).toUpperCase() + state.slice(1).toLowerCase();
     return `${celsius} in ${city}, ${stateCap}`;
   });
 }
