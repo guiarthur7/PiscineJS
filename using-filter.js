@@ -1,5 +1,5 @@
 function filterShortStateName(tab) {
-    return tab.filter(word => word.length > 6)
+    return tab.filter(word => word.length < 7)
 }
 
 console.log(filterShortStateName(["Salutcarthur", "aa"]))
