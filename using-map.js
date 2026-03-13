@@ -4,7 +4,10 @@ function citiesOnly(tab) {
 }
 
 function upperCasingStates(tab) {
-    return tab.map(state => state.toUpperCase());
+    const states = tab.map(obj => 
+        obj[0].toUpperCase() + obj.slice(1)
+    )
+    return states
 }
 
 console.log(citiesOnly([
