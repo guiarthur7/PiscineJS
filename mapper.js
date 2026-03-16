@@ -20,7 +20,7 @@ function flatMap(tab, func) {
                 res2.push(res[x][y])
             }
         } else {
-            res3 += res[x]
+            res3 += String(res[x])
         }
     }
     if (res3) {
