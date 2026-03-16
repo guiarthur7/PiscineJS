@@ -5,7 +5,7 @@ function every(tab, func) {
             n++
         }
     }
-    if (n === tab.length - 1) {
+    if (n === tab.length) {
         return true
     } else {
         return false
