@@ -1,15 +1,10 @@
 function every(tab, func) {
-    let n = 0 
-    for (let i=0;i<tab.length;i++) {
-        if (func(tab[i], i, tab)) {
-            n++
+    for (let i = 0; i < tab.length; i++) {
+        if (!func(tab[i], i, tab)) {
+            return false
         }
     }
-    if (n === tab.length) {
-        return true
-    } else {
-        return false
-    }
+    return true
 }
 
 function some(tab, func) {
