@@ -25,12 +25,8 @@ function none(tab, func) {
     let n = 0 
     for (let i=0;i<tab.length;i++) {
         if (func(tab[i], i, tab)) {
-            n++
+            return false
         }
     }
-    if (n === 0) {
-        return true
-    } else {
-        return false
-    }
+    return true
 }
