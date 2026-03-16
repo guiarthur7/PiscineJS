@@ -1,32 +1,32 @@
 function filter(tab, pred) {
-    let tab = []
+    let tabb = []
     for (let i = 0; i < tab.length; i++) {
         if (pred(tab[i], i, tab)) {
-            tab.push(tab[i])
+            tabb.push(tab[i])
         }
     }
-    return tab
+    return tabb
 }
 
 function reject(tab, pred) {
-    let tab = []
+    let tabb = []
     for (let i = 0; i < tab.length; i++) {
         if (!pred(tab[i], i, tab)) {
-            tab.push(tab[i])
+            tabb.push(tab[i])
         }
     }
-    return tab
+    return tabb
 }
 
 function partition(tab, pred) {
-    let tab = []
+    let tabb = []
     let tab2 = []
     for (let i = 0; i < tab.length; i++) {
         if (pred(tab[i], i, tab)) {
-            tab.push(tab[i])
+            tabb.push(tab[i])
         } else {
             tab2.push(tab[i])
         }
     }
-    return [tab, tab2]
+    return [tabb, tab2]
 }
