@@ -13,7 +13,7 @@ function flatMap(tab, func) {
     }
     let res2 = []
     for (let x = 0; x < res.length; x++) {
-        for (y = 0; y < res[x].length; y++) {
+        for (let y = 0; y < res[x].length; y++) {
             res2.push(res[x][y])
         }
     }
