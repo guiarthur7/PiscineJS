@@ -11,10 +11,15 @@ function flatMap(tab, func) {
     for (let i = 0; i < tab.length; i++) {
         res.push(func(tab[i], i, tab))
     }
+
     let res2 = []
     for (let x = 0; x < res.length; x++) {
-        for (let y = 0; y < res[x].length; y++) {
-            res2.push(res[x][y])
+        if (Array.isArray(res[x])) {
+            for (let y = 0; y < res[x].length; y++) {
+                res2.push(res[x][y])
+            }
+        } else {
+            res2 += res[x]
         }
     }
     return res2
