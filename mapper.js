@@ -23,7 +23,7 @@ function flatMap(tab, func) {
             res3 += String(res[x])
         }
     }
-    if (res3) {
+    if (res3.length > 0) {
         return res3
     } else {
         return res2
