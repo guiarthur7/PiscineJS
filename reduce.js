@@ -1,37 +1,29 @@
 function fold(tab, func, n) {
-    let res = 0
     tab.unshift(n)
-    for (let i = 0; i<tab.length-1; i++) {
-        res += func(tab[i], tab[i+1])
-        i++
+    for (let i = 0; i < tab.length; i++) {
+        acc = func(acc, tab[i], i, tab)
     }
-    return res
+    return acc
 }
 
 function foldRight(tab, func, n) {
-    let res = 0
     tab.unshift(n)
-    for (let i = tab.length-1; i>0; i--) {
-        res += func(tab[i], tab[i-1])
-        i--
+    for (let i = tab.length - 1; i >= 0; i--) {
+        acc = func(acc, tab[i], i, tab)
     }
-    return res
+    return acc
 }
 
 function reduce(tab, func) {
-    let res = 0
-    for (let i = 0; i<tab.length-1; i++) {
-        res += func(tab[i], tab[i+1])
-        i++
+    for (let i = 0; i < tab.length; i++) {
+        acc = func(acc, tab[i], i, tab)
     }
-    return res + tab[tab.length-1]
+    return acc
 }
 
 function reduceRight(tab, func) {
-    let res = 0
-    for (let i = tab.length-1; i>0; i--) {
-        res += func(tab[i], tab[i-1])
-        i--
+    for (let i = tab.length - 1; i >= 0; i--) {
+        acc = func(acc, tab[i], i, tab)
     }
-    return res + tab[0]
+    return acc
 }
