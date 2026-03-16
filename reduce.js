@@ -16,22 +16,22 @@ function foldRight(tab, func, initial) {
     return acc
 }
 
-function reduce(tab, func, initial) {
-    let acc = initial
+function reduce(tab, func) {
     if (tab.length <= 0) {
-        return NaN
+        return "Error"
     }
+    let acc = tab[0]
     for (let i = 0; i < tab.length; i++) {
         acc = func(acc, tab[i], i, tab)
     }
     return acc
 }
 
-function reduceRight(tab, func, initial) {
-    let acc = initial
+function reduceRight(tab, func) {
     if (tab.length <= 0) {
-        return NaN
+        return "Error"
     }
+    let acc = tab[0]
     for (let i = tab.length - 1; i >= 0; i--) {
         acc = func(acc, tab[i], i, tab)
     }
