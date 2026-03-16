@@ -19,7 +19,7 @@ function foldRight(tab, func, initial) {
 function reduce(tab, func, initial) {
     let acc = initial
     if (tab.length <= 0) {
-        return "Error"
+        return acc
     }
     for (let i = 0; i < tab.length; i++) {
         acc = func(acc, tab[i], i, tab)
@@ -27,10 +27,10 @@ function reduce(tab, func, initial) {
     return acc
 }
 
-function reduceRight(tab, func) {
+function reduceRight(tab, func, initial) {
     let acc = initial
     if (tab.length <= 0) {
-        return "Error"
+        return acc
     }
     for (let i = tab.length - 1; i >= 0; i--) {
         acc = func(acc, tab[i], i, tab)
