@@ -13,5 +13,5 @@ console.log(oneLongWord(["iuzfbvaiufaufaf", "uadbgbrguijub"]))
 console.log(oneLongWord(["ufaf", "uaub"]))
 
 function noLongWords(tab) {
-    return tab.every(word => word.length <= 7)
+    return tab.every(word => word.length < 7)
 }
