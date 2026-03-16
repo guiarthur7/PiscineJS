@@ -9,23 +9,14 @@ function map(tab, func) {
 function flatMap(tab, func) {
     let res = []
     for (let i = 0; i < tab.length; i++) {
-        res.push(func(tab[i], i, tab))
-    }
-
-    let res2 = []
-    let res3 = ""
-    for (let x = 0; x < res.length; x++) {
-        if (Array.isArray(res[x])) {
-            for (let y = 0; y < res[x].length; y++) {
-                res2.push(res[x][y])
+        const val = func(tab[i], i, tab)
+        if (Array.isArray(val)) {
+            for (let j = 0; j < val.length; j++) {
+                res.push(val[j])
             }
         } else {
-            res3 += String(res[x])
+            res.push(val)
         }
     }
-    if (res3.length > 0) {
-        return res3
-    } else {
-        return res2
-    }
+    return res
 }
