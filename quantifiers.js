@@ -22,7 +22,6 @@ function some(tab, func) {
 }
 
 function none(tab, func) {
-    let n = 0 
     for (let i=0;i<tab.length;i++) {
         if (func(tab[i], i, tab)) {
             return false
