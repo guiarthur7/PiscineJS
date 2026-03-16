@@ -13,14 +13,19 @@ function flatMap(tab, func) {
     }
 
     let res2 = []
+    let res3 = ""
     for (let x = 0; x < res.length; x++) {
         if (Array.isArray(res[x])) {
             for (let y = 0; y < res[x].length; y++) {
                 res2.push(res[x][y])
             }
         } else {
-            res2 += res[x]
+            res3 += res[x]
         }
     }
-    return res2
+    if (res3) {
+        return res3
+    } else {
+        return res2
+    }
 }
