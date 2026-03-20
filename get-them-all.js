@@ -21,7 +21,7 @@ export function getActive() {
 
 export function getBonannoPisano() {
     const classicalAactive = getActive()[0]
-    const isBonanno = classicalAactive.filter(el => el.id === "BonannoPisano")
+    const isBonanno = classicalAactive.find(el => el.id === "BonannoPisano")
     const isNotBonanno = classicalAactive.filter(el => !el.id !== "BonannoPisano")
     return [isBonanno, isNotBonanno];
 }
