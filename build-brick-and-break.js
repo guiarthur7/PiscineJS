@@ -9,8 +9,8 @@ export function build(nbBrique) {
         }
         const div = document.createElement("div");
         div.id = `brick-${cpt1}`
-        if (cpt1%3===1) {
-            div.setAttribute('foundation', 'true')
+        if (cpt1%3===2) {
+            div.setAttribute('data-foundation', 'true')
         }
         document.body.appendChild(div);
         cpt1 += 1;
