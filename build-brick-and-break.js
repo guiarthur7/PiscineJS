@@ -25,8 +25,6 @@ export function repair(...ids) {
     if (!brick) return;
     if (brick.dataset.foundation === "true") {
       brick.dataset.repaired = 'in progress';
-    } else {
-      brick.dataset.repaired = 'repaired';
     }
   });
 }
