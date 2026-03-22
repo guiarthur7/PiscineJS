@@ -23,9 +23,9 @@ export function repair(ids) {
     ids.array.forEach(id => {
         const brick = document.getElementById(id);
         if (brick.dataset.foundation === "true") {
-            brick.setAttribute('data-repaired', 'in progress')
+            brick.dataset.repaired = 'in progress';
         } else {
-            brick.setAttribute('data-repaired', 'repaired')
+            brick.dataset.repaired = 'repaired';
         }
     });
 }
