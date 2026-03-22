@@ -21,10 +21,12 @@ export function build(nbBrique) {
 
 export function repair(...ids) {
   ids.flat().forEach(id => {
-    const brick = document.getElementById(id);
+    const brick = document.getElementById(`brick-${id}`);
     if (!brick) return;
     if (brick.dataset.foundation === "true") {
       brick.dataset.repaired = 'in progress';
+    } else {
+        brick.dataset.repaired = 'repaired';
     }
   });
 }
