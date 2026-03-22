@@ -15,3 +15,14 @@ export function build(nbBrique) {
     }
     , 100);
 }
+
+export function repair(ids) {
+    ids.array.forEach(id => {
+        const brick = document.getElementById(id);
+        if (brick.getAttribute("foundation") === "true") {
+            brick.setAttribute('repaired', 'in progress')
+        } else {
+            brick.setAttribute('repaired', 'true')
+        }
+    });
+}
