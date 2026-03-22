@@ -22,7 +22,7 @@ export function build(nbBrique) {
 export function repair(ids) {
     ids.array.forEach(id => {
         const brick = document.getElementById(id);
-        if (brick.getAttribute("foundation") === "true") {
+        if (brick.dataset.foundation === "true") {
             brick.setAttribute('data-repaired', 'in progress')
         } else {
             brick.setAttribute('data-repaired', 'repaired')
