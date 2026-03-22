@@ -20,15 +20,15 @@ export function build(nbBrique) {
 }
 
 export function repair(...ids) {
-    (Array.isArray(ids[0]) ? ids[0] : ids).forEach(id => {
-        const brick = document.getElementById(id);
-        if (!brick) return;
-        if (brick.dataset.foundation === "true") {
-            brick.dataset.repaired = 'in progress';
-        } else {
-            brick.dataset.repaired = 'repaired';
-        }
-    });
+  ids.flat().forEach(id => {
+    const brick = document.getElementById(id);
+    if (!brick) return;
+    if (brick.dataset.foundation === "true") {
+      brick.dataset.repaired = 'in progress';
+    } else {
+      brick.dataset.repaired = 'repaired';
+    }
+  });
 }
 
 export function destroy() {
