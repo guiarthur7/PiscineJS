@@ -1,4 +1,4 @@
-function build(nbBrique) {
+export function build(nbBrique) {
     let cpt = 1
     const interval = setInterval(() => {
         if (cpt > nbBrique) {
