@@ -19,9 +19,10 @@ export function build(nbBrique) {
     , 100);
 }
 
-export function repair(ids) {
-    ids.array.forEach(id => {
+export function repair(...ids) {
+    (Array.isArray(ids[0]) ? ids[0] : ids).forEach(id => {
         const brick = document.getElementById(id);
+        if (!brick) return;
         if (brick.dataset.foundation === "true") {
             brick.dataset.repaired = 'in progress';
         } else {
