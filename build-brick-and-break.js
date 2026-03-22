@@ -1,9 +1,9 @@
 let cpt = 1;
 
 export function build(nbBrique) {
-    let cpt1 = 1
+    let cpt1 = 0
     const interval = setInterval(() => {
-        if (cpt > nbBrique) {
+        if (cpt >= nbBrique) {
             clearInterval(interval)
             return;
         }
@@ -32,7 +32,7 @@ export function repair(...ids) {
 }
 
 export function destroy() {
-    const div = document.getElementById(`brick-${cpt}`)
+    const div = document.getElementById(`brick-${cpt-1}`)
     div.remove()
     cpt -= 1
 }
