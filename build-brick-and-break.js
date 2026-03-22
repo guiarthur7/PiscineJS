@@ -20,6 +20,9 @@ export function build(nbBrique) {
 }
 
 export function repair(...ids) {
+  document.querySelectorAll('div[data-repaired]').forEach(div => {
+    div.removeAttribute('data-repaired');
+  });
   ids.flat().forEach(id => {
     const brick = document.getElementById(id);
     if (!brick) return;
