@@ -26,7 +26,7 @@ export function repair(...ids) {
     if (brick.getAttribute('data-foundation') === "true") {
       brick.setAttribute('data-repaired', 'in progress');
     } else {
-      brick.setAttribute('data-repaired', 'repaired');
+      brick.setAttribute('data-repaired', 'true');
     }
   });
 }
@@ -36,16 +36,3 @@ export function destroy() {
     div.remove()
     cpt -= 1
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const hammer = document.getElementById('hammer');
-  if (hammer) {
-    hammer.addEventListener('click', () => {
-      const reparations = document.body.dataset.reparations;
-      if (reparations) {
-        const ids = reparations.split(',');
-        repair(...ids);
-      }
-    });
-  }
-});
