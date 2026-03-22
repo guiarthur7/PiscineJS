@@ -32,7 +32,7 @@ export function repair(...ids) {
 }
 
 export function destroy() {
-    const div = document.getElementById(`brick-${cpt}`)
-    div.remove()
-    cpt -= 1
+    const div = document.getElementById(`brick-${cpt - 1}`);
+    if (div) div.remove();
+    cpt -= 1;
 }
