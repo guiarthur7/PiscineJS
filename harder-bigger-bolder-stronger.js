@@ -3,7 +3,7 @@ export function generateLetters() {
     let result = [];
     for (let i = 1; i <= 120; i ++) {
         const lettre = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-        div = document.createElement("div")
+        let div = document.createElement("div")
         document.body.appendChild(div);
         div.textContent = lettre;
         div.style.fontSize = `${size}`
