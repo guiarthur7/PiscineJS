@@ -1,4 +1,4 @@
-function generateLetters() {
+export function generateLetters() {
     let size = 11;
     for (let i = 1; i <= 120; i ++) {
         const lettre = String.fromCharCode(65 + Math.floor(Math.random() * 26));
