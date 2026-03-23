@@ -1,5 +1,6 @@
 export function generateLetters() {
     let size = 11;
+    let result = [];
     for (let i = 1; i <= 120; i ++) {
         const lettre = String.fromCharCode(65 + Math.floor(Math.random() * 26));
         div = document.createElement("div")
@@ -14,5 +15,7 @@ export function generateLetters() {
             div.style.fontWeight = "600";
         }
         size += 1
+        result.push(div)
     }
+    return result
 }
