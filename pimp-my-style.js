@@ -4,6 +4,9 @@ let cpt = 0;
 let cpt2 = 0;
 export function pimp() {
     const btn = document.querySelector('.button');
+    if (!btn) {
+        return
+    }
     if (cpt < stylestableau.length) {
         btn.classList.add(stylestableau[cpt]);
         cpt += 1;
