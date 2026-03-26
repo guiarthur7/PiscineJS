@@ -11,8 +11,8 @@ export function createCircle(x, y) {
     div.classList.add('circle');
     div.style.background = 'white';
     div.style.position = 'absolute';
-    div.style.left = x + 'px';
-    div.style.top = y + 'px';
+    div.style.left = (x - 25) + 'px';
+    div.style.top = (y - 25) + 'px';
     document.body.appendChild(div);
 }
 
