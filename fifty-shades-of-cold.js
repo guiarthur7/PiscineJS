@@ -28,3 +28,5 @@ export function chooseShade(color) {
         div.className = color;
     }
 }
+
+generateClasses();
