@@ -2,7 +2,7 @@ document.addEventListener("mousemove", (e) => {
     pick(e.clientX, e.clientY, window.innerWidth, window.innerHeight)
 })
 
-export function pick(x, y, w, h) {
+function pick(x, y, w, h) {
     const svg = document.getElementById('crosshairs');
     const axisX = document.getElementById('axisX');
     const axisY = document.getElementById('axisY');
