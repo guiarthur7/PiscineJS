@@ -1,4 +1,4 @@
-import { styles } from './pimp-my-style.data.js';
+import { styles } from './pimp-my-style/pimp-my-style.data.js';
 
 let cpt = 0;
 let cpt2 = 0;
