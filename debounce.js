@@ -8,22 +8,21 @@ function debounce(func, delay) {
     }
 }
 
-function opDebounce(func, time, option = { leading : false}) {
-    let timer = null
+function opDebounce(func, wait, option = { leading: false }) {
+    let timeout = null
     let called = false
     let { leading } = option
-    if (leading == true && called == false) {
-        return function(...args) {
+    return function (...args) {
+        if (leading && !called) {
             func(...args)
             called = true
         }
-    } else {
-        clearTimeout(timer);
-        timer = setTimeout(() => {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => {
             called = false
             if (!leading) {
-                func(...args);
+                func(...args)
             }
-        }, time);
+        }, wait)
     }
 }
