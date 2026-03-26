@@ -1,0 +1,34 @@
+.hsl {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 1em 2em;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-family: monospace;
+    z-index: 1001;
+}
+
+.hue.text {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    font-family: monospace;
+    z-index: 1001;
+}
+
+.luminosity.text {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    font-family: monospace;
+    z-index: 1001;
+}
