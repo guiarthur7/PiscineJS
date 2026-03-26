@@ -22,7 +22,7 @@ export function generateColdShades() {
     }
 }
 
-export function chooseShade(color) {
+export function choseShade(color) {
     const divs = document.querySelectorAll('div');
     for (const div of divs) {
         div.className = color;
