@@ -21,14 +21,23 @@ export function moveCircle(x, y) {
     if (!circles.length) return;
     const cir = circles[circles.length - 1];
     const box = document.getElementsByClassName("box")[0];
-    if (cir.dataset.trapped === '1') return;
-
-    cir.style.left = (x - 25) + 'px';
-    cir.style.top = (y - 25) + 'px';
-
     if (box) {
-        const c = cir.getBoundingClientRect();
         const b = box.getBoundingClientRect();
+        let cx = x;
+        let cy = y;
+        if (cir.dataset.trapped === '1') {
+            if (cx < b.left + 25) cx = b.left + 25;
+            if (cx > b.right - 25) cx = b.right - 25;
+            if (cy < b.top + 25) cy = b.top + 25;
+            if (cy > b.bottom - 25) cy = b.bottom - 25;
+            cir.style.left = (cx - 25) + 'px';
+            cir.style.top = (cy - 25) + 'px';
+            return;
+        }
+        cir.style.left = (x - 25) + 'px';
+        cir.style.top = (y - 25) + 'px';
+  
+        const c = cir.getBoundingClientRect();
         const centerX = c.left + 25;
         const centerY = c.top + 25;
         const insideX = centerX > b.left + 25 && centerX < b.right - 25;
@@ -37,6 +46,9 @@ export function moveCircle(x, y) {
             cir.style.background = 'var(--purple)';
             cir.dataset.trapped = '1';
         }
+    } else {
+        cir.style.left = (x - 25) + 'px';
+        cir.style.top = (y - 25) + 'px';
     }
 }
 
