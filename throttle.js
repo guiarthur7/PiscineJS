@@ -10,31 +10,20 @@ function throttle(func, time) {
     }
 }
 
-function opThrottle(func, time, options = {leading: false, trailing: false,}) {
-    const { leading, trailing } = options
+function opThrottle(func, wait, obj) {
     let timer = null
     let lastArgs = null
-    let lastThis = null
-
-    return function(...arg) {
-        lastArgs = arg
-        lastThis = this
-
-        if (!timer) {
-            if (leading) {
-                func.apply(lastThis, lastArgs)
-                lastArgs = null
-                lastThis = null
-            }
-
-            timer = setTimeout(() => {
-                timer = null
-                if (trailing && lastArgs) {
-                    func.apply(lastThis, lastArgs)
-                    lastArgs = null
-                    lastThis = null
-                }
-            }, time)
-        }
+    const timeup = () => {
+        if (obj?.trailing && lastArgs) {
+            func(...lastArgs)
+            lastArgs = null
+            timer = setTimeout(timeup, wait)
+        } else timer = null
+    }
+    return function (...args) {
+        lastArgs = args
+        if (!timer && obj?.leading) func(...args)
+        if (!timer) timer = setTimeout(timeup, wait)
+        if (obj?.trailing) lastArgs = args
     }
 }
