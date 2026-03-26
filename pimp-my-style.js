@@ -18,7 +18,7 @@ export function pimp() {
             cpt2--;
             if (cpt2 === 0) {
                 btn.classList.remove('unpimp');
-                cpt = 0;
+                cpt = 0
             }
         }
     }
