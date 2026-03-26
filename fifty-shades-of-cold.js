@@ -13,7 +13,8 @@ export function generateClasses() {
 
 export function generateColdShades() {
     for (const color of colors) {
-        if (color === "aqua" || color === "blue" || color === "turquoise" || color === "green" || color === "cyan" || color === "navy" || color === "purple") {
+        const coldWords = ['aqua', 'blue', 'turquoise', 'green', 'cyan', 'navy', 'purple'];
+        if (coldWords.some(word => color.includes(word))) {
             const div = document.createElement('div');
             div.classList.add(color)
             div.textContent = color;
