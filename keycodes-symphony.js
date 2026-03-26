@@ -1,8 +1,8 @@
 export const compose = () => {
     const getColor = (key) => {
-        const code = key.charCodeAt(0) - 97; // 0-25 for a-z
-        const hue = (code * 360) / 26; // Distribute evenly across color spectrum
-        return 'hsl(${hue}, 100%, 50%)';
+        const code = key.charCodeAt(0) - 97;
+        const hue = (code * 360) / 26;
+        return `hsl(${hue}, 100%, 50%)`;
     };
 
     document.addEventListener('keydown', (event) => {
