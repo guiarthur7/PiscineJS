@@ -17,13 +17,42 @@ export function createCircle(x, y) {
 }
 
 export function moveCircle(x, y) {
-    const cir = document.getElementsByTagName("div")[0];
-    if (cir) {
-        cir.style.left = x + 'px';
-        cir.style.top = y + 'px';
+    const cir = document.getElementsByClassName("circle")[0];
+    const box = document.getElementsByClassName("box")[0];
+    if (!cir) return;
+
+    if (cir.dataset.trapped === '1') return;
+
+    cir.style.left = x + 'px';
+    cir.style.top = y + 'px';
+
+    if (box) {
+        const c = cir.getBoundingClientRect();
+        const b = box.getBoundingClientRect();
+
+        if (
+            c.left > b.left + 1 &&
+            c.top > b.top + 1 &&
+            c.right < b.right - 1 &&
+            c.bottom < b.bottom - 1
+        ) {
+            cir.style.background = 'var(--purple)';
+            cir.dataset.trapped = '1';
+        }
     }
 }
 
 export function setBox() {
-    
+    const box = document.createElement('div');
+    box.classList.add('box');
+    box.style.position = 'absolute';
+
+    const width = window.innerWidth * 0.25;
+    const height = window.innerHeight * 0.25;
+    box.style.width = width + 'px';
+    box.style.height = height + 'px';
+
+    box.style.left = `calc(50% - ${width / 2}px)`;
+    box.style.top = `calc(50% - ${height / 2}px)`;
+    document.body.appendChild(box);
 }
