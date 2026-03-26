@@ -12,28 +12,29 @@ function throttle(func, time) {
 
 function opThrottle(func, time, options = {leading: false, trailing: false,}) {
     const { leading, trailing } = options
-    let waiting = false
-    let firstCalled = false
+    let timer = null
+    let lastArgs = null
+    let lastThis = null
 
     return function(...arg) {
-        if (leading && !firstCalled) {
-            func(...arg)
-            firstCalled = true
-            waiting = true
-            setTimeout(() => {
-                waiting = false
-            }, time)
-            return
-        }
-        if (waiting) return
+        lastArgs = arg
+        lastThis = this
 
-        func(...arg)
-        waiting = true
-        setTimeout(() => {
-            waiting = false
-            if (trailing) {
-                func()
+        if (!timer) {
+            if (leading) {
+                func.apply(lastThis, lastArgs)
+                lastArgs = null
+                lastThis = null
             }
-        }, time)
+
+            timer = setTimeout(() => {
+                timer = null
+                if (trailing && lastArgs) {
+                    func.apply(lastThis, lastArgs)
+                    lastArgs = null
+                    lastThis = null
+                }
+            }, time)
+        }
     }
 }
