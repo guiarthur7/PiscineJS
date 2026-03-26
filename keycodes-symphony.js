@@ -1,25 +1,28 @@
 document.addEventListener("keydown", (event) => {
-    const key = event.key;
-    compose(key)
+    compose(event);
 });
 
-let cpt = 0;
+function compose(event) {
+    const key = event.key;
 
-function compose(key) {
-    if (key >= "a" && key <= "z") {
-        const div = document.createElement('div')
+    if (key.length === 1 && key >= 'a' && key <= 'z') {
+        const div = document.createElement('div');
+        div.classList.add('note');
         div.textContent = key;
         const color = '#' + (key.charCodeAt(0) * 1234567 % 0xFFFFFF).toString(16).padStart(6, '0');
         div.style.background = color;
-        div.classList.add(`${cpt}`)
-        document.body.appendChild(div)
-        cpt ++;
-    }
-    if (key === "Delete") {
-        if (cpt > 0) {
-            cpt--;
-            const last = document.getElementsByClassName(`${cpt}`)[0];
-            last.remove();
+        document.body.appendChild(div);
+
+    } else if (key === "Backspace") {
+        const notes = document.getElementsByClassName('note');
+        if (notes.length > 0) {
+            notes[notes.length - 1].remove();
+        }
+        
+    } else if (key === "Escape") {
+        const notes = document.getElementsByClassName('note');
+        while (notes.length > 0) {
+            notes[0].remove();
         }
     }
 }
