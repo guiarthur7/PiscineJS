@@ -13,9 +13,10 @@
 
     import { setBox, createCircle, moveCircle } from './mouse-trap.js'
 
-    setBox()
-    createCircle()
-    moveCircle()
+
+    document.addEventListener('mousemove', (e) => {
+      moveCircle(e.clientX, e.clientY);
+    });
 
   </script>
 </body>
