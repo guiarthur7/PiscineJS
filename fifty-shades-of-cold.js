@@ -1,4 +1,4 @@
-import { colors } from './subjects/fifty-shades-of-cold/fifty-shade-of-cold/fifty-shades-of-cold.data.js'
+import { colors } from './fifty-shades-of-cold.data.js'
 
 export function generateClasses() {
     const head = document.head;
