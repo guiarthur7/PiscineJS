@@ -1,4 +1,4 @@
-import { colors } from './fifty-shades-of-cold/fifty-shades-of-cold.data.js'
+import { colors } from './subjects/fifty-shades-of-cold/fifty-shade-of-cold/fifty-shades-of-cold.data.js'
 
 export function generateClasses() {
     const head = document.head;
@@ -23,7 +23,7 @@ export function generateColdShades() {
 }
 
 export function chooseShade(color) {
-    const divs = document.querySelectorAll('div'); // ou un sélecteur plus précis si besoin
+    const divs = document.querySelectorAll('div');
     for (const div of divs) {
         div.className = color;
     }
