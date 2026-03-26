@@ -17,19 +17,18 @@ export function createCircle(x, y) {
 }
 
 export function moveCircle(x, y) {
-    const cir = document.getElementsByClassName("circle")[0];
+    const circles = document.getElementsByClassName("circle");
+    if (!circles.length) return;
+    const cir = circles[circles.length - 1];
     const box = document.getElementsByClassName("box")[0];
-    if (!cir) return;
-
     if (cir.dataset.trapped === '1') return;
 
-    cir.style.left = x + 'px';
-    cir.style.top = y + 'px';
+    cir.style.left = (x - 25) + 'px';
+    cir.style.top = (y - 25) + 'px';
 
     if (box) {
         const c = cir.getBoundingClientRect();
         const b = box.getBoundingClientRect();
-
         if (
             c.left > b.left + 1 &&
             c.top > b.top + 1 &&
