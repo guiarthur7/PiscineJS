@@ -29,12 +29,11 @@ export function moveCircle(x, y) {
     if (box) {
         const c = cir.getBoundingClientRect();
         const b = box.getBoundingClientRect();
-        if (
-            c.left > b.left + 1 &&
-            c.top > b.top + 1 &&
-            c.right < b.right - 1 &&
-            c.bottom < b.bottom - 1
-        ) {
+        const centerX = c.left + 25;
+        const centerY = c.top + 25;
+        const insideX = centerX > b.left + 25 && centerX < b.right - 25;
+        const insideY = centerY > b.top + 25 && centerY < b.bottom - 25;
+        if (insideX && insideY) {
             cir.style.background = 'var(--purple)';
             cir.dataset.trapped = '1';
         }
