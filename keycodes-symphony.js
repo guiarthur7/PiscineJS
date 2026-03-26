@@ -1,26 +1,28 @@
-document.addEventListener("keydown", (event) => {
-    compose(event);
-});
+export const compose = () => {
+    const getColor = (key) => {
+        const code = key.charCodeAt(0) - 97; // 0-25 for a-z
+        const hue = (code * 360) / 26; // Distribute evenly across color spectrum
+        return 'hsl(${hue}, 100%, 50%)';
+    };
 
-function compose(event) {
-    const key = event.key;
-    if (key.length === 1 && ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z'))) {
-        const div = document.createElement('div');
-        div.classList.add('note');
-        div.textContent = key;
-        const color = '#' + (key.charCodeAt(0) * 1234567 % 0xFFFFFF).toString(16).padStart(6, '0');
-        div.style.background = color;
-        document.body.appendChild(div);
-    } else if (key === "Backspace") {
-        const notes = document.getElementsByClassName('note');
-        if (notes.length > 0) {
-            notes[notes.length - 1].remove();
+    document.addEventListener('keydown', (event) => {
+        const key = event.key;
+
+        if (key >= 'a' && key <= 'z') {
+            const div = document.createElement('div');
+            div.className = 'note';
+            div.textContent = key;
+            div.style.backgroundColor = getColor(key);
+            document.body.appendChild(div);
         }
-        
-    } else if (key === "Escape") {
-        const notes = document.getElementsByClassName('note');
-        while (notes.length > 0) {
-            notes[0].remove();
+        else if (key === 'Backspace') {
+            const notes = document.querySelectorAll('.note');
+            if (notes.length > 0) {
+                notes[notes.length - 1].remove();
+            }
         }
-    }
-}
+        else if (key === 'Escape') {
+            document.querySelectorAll('.note').forEach((note) => note.remove());
+        }
+    });
+};
