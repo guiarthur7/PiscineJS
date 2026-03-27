@@ -11,7 +11,7 @@ export async function getJSON(path, params) {
 	const json = await response.json();
 	if (json && typeof json === 'object') {
 		if (Object.prototype.hasOwnProperty.call(json, 'error')) {
-			throw json.error;
+			throw new Error(json.error);
 		}
 		if (Object.prototype.hasOwnProperty.call(json, 'data')) {
 			return json.data;
