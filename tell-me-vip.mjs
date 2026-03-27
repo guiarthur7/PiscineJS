@@ -1,32 +1,31 @@
-import { readdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { readFileSync, writeFileSync } from 'node:fs';
+import { readdir } from 'node:fs/promises';
+import { join } from 'node:path';
 
-try {
-  const dirPath = process.argv[2];
-  if (!dirPath) throw new Error("Please provide a directory path.");
+const dir = process.argv[2] || '.';
+const files = await readdir(dir);
 
-  const files = await readdir(dirPath);
-  const guests = await Promise.all(
-    files.map(async (file) => {
-      const content = await readFile(join(dirPath, file), "utf8");
-      return JSON.parse(content);
-    }),
-  );
+const names = [];
 
-  const vipGuests = guests
-    .filter((g) => g.answer === "YES")
-    .sort(
-      (a, b) =>
-        a.lastname.localeCompare(b.lastname) ||
-        a.firstname.localeCompare(b.firstname),
-    );
+for (let i = 0; i < files.length; i++) {
+  const filePath = join(dir, files[i]);
+  const raw = readFileSync(filePath, 'utf8');
+  const text = raw.trim();
+  if (!text) continue;
 
-  const output = vipGuests
-    .map((g, i) => `${i + 1}. ${g.lastname} ${g.firstname}`)
-    .join("\n");
+  let obj;
+  try {
+    obj = JSON.parse(text);
+  } catch (err) {
+    continue;
+  }
 
-  await writeFile("vip.txt", output);
-  console.log("VIP list saved to vip.txt");
-} catch (err) {
-  console.error("Error:", err.message);
+  if (obj && obj.answer === 'YES') {
+    names.push(`${obj.lastname} ${obj.firstname}`);
+  }
 }
+
+names.sort((a, b) => a.localeCompare(b, 'en'));
+
+const out = names.map((n, i) => `${i + 1}. ${n}`).join('\n');
+writeFileSync('vip.txt', out, 'utf8');
