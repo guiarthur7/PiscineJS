@@ -49,10 +49,11 @@ function filterCurry(filterFn) {
 	};
 }
 
-function reduceScore(personnel) {
+function reduceScore(personnel, initial) {
 	const reducer = reduceCurry((acc, [k, v]) => acc + (v.pilotingScore + v.shootingScore));
 	const force = filterCurry(([k, v]) => !!v.isForceUser)(personnel);
-	return reducer(force, 0);
+	const init = arguments.length >= 2 ? initial : 0;
+	return reducer(force, init);
 }
 
 function filterForce(personnel) {
