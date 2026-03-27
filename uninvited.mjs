@@ -19,13 +19,13 @@ const server = http.createServer(async (req, res) => {
 
       req.on("end", async () => {
         try {
-          const data = JSON.parse(body);
           const filePath = join(GUESTS_DIR, `${guestName}.json`);
 
-          await writeFile(filePath, JSON.stringify(data, null, 2));
+          // On écrit le body tel quel, sans JSON.parse
+          await writeFile(filePath, body);
 
           res.statusCode = 201;
-          res.end(JSON.stringify(data));
+          res.end(body);
         } catch {
           res.statusCode = 500;
           res.end(JSON.stringify({ error: "server failed" }));
