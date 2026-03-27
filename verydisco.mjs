@@ -8,4 +8,4 @@ for (let i = 0; i < words.length; i++) {
         res += words[i].slice((words[i].length / 2)) + words[i].slice(0, words[i].length / 2) + ' '
     }
 }
-console.log(res)
+console.log(res.slice(0, res.length -1))
