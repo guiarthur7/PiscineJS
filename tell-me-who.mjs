@@ -5,12 +5,12 @@ try {
   if (!dirPath) throw new Error("Please provide a directory path.");
 
   const files = await readdir(dirPath);
-  const guests = await Promise.all(
-    files.map((file) => readFile(`${dirPath}/${file}`, "utf8")),
+  const contents = await Promise.all(
+    files.map((file) => readFile(`${dirPath}/${file}`, 'utf8')),
   );
 
-  const sortedGuests = guests.sort();
-  sortedGuests.forEach((guest, i) => console.log(`${i + 1}. ${guest}`));
+  const names = contents.map((c) => c.trim()).sort((a, b) => a.localeCompare(b, 'en'));
+  names.forEach((name, i) => console.log(`${i + 1}. ${name}`));
 } catch (err) {
   console.error("Error:", err.message);
 }
