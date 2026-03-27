@@ -47,7 +47,7 @@ const nutritionDB = {
 function totalCalories(obj) {
     return reduceEntries(obj, (acc, [name, grams]) => {
         const per100 = nutritionDB[name].calories
-        return acc + per100 * (grams / 100);
+        return Math.round(acc + per100 * (grams / 100));
     }, 0);
 }
 
