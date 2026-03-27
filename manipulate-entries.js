@@ -63,12 +63,12 @@ function cartTotal(obj) {
     return mapEntries(obj, ([name, grams]) => {
         let res = {}
         const per = nutritionDB[name] || { calories: 0, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 0 };
-        res["calories"] = Math.round((per.calories * (grams / 100))*10)/10;
-        res["protein"] = Math.round((per.protein * (grams / 100))*10)/10;
-        res["carbs"] = Math.round((per.carbs * (grams / 100))*10)/10;
-        res["sugar"] = Math.round((per.sugar * (grams / 100))*10)/10;
-        res["fiber"] = Math.round((per.fiber * (grams / 100))*10)/10;
-        res["fat"] = Math.round((per.fat * (grams / 100))*10)/10;
+        res["calories"] = Math.round((per.calories * (grams / 100))*1000)/1000;
+        res["protein"] = Math.round((per.protein * (grams / 100))*1000)/1000;
+        res["carbs"] = Math.round((per.carbs * (grams / 100))*1000)/1000;
+        res["sugar"] = Math.round((per.sugar * (grams / 100))*1000)/1000;
+        res["fiber"] = Math.round((per.fiber * (grams / 100))*1000)/1000;
+        res["fat"] = Math.round((per.fat * (grams / 100))*1000)/1000;
 
         return [name, res]
     })
