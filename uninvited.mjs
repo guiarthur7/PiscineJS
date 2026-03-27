@@ -1,5 +1,5 @@
 import http from "node:http";
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
@@ -34,16 +34,25 @@ const server = http.createServer((req, res) => {
 
     req.on("end", async () => {
       try {
-        const data = JSON.parse(body);
+        await mkdir(GUESTS_DIR, { recursive: true });
+
+        const data = JSON.parse(body || "{}");
         const filePath = join(GUESTS_DIR, `${guestName}.json`);
         await writeFile(filePath, JSON.stringify(data, null, 2));
+        
         res.statusCode = 200;
         res.end(JSON.stringify(data));
-      } catch {
+      } catch (err) {
         res.statusCode = 500;
         res.end(JSON.stringify({ error: "server failed" }));
       }
     });
+
+    req.on("error", () => {
+      res.statusCode = 500;
+      res.end(JSON.stringify({ error: "server failed" }));
+    });
+
   } else {
     res.statusCode = 500;
     res.end(JSON.stringify({ error: "server failed" }));
@@ -52,4 +61,4 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-})
+});
