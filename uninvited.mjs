@@ -1,5 +1,5 @@
 import http from "node:http";
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
@@ -10,23 +10,26 @@ const server = http.createServer(async (req, res) => {
 
   try {
     if (req.method === "POST") {
-      const guestName = req.url.slice(1);
-      let body = "";
+      const guestName = (req.url || '').slice(1);
+      if (!guestName) {
+        res.statusCode = 404;
+        res.end(JSON.stringify({ error: 'guest not found' }));
+        return;
+      }
 
-      req.on("data", (chunk) => {
-        body += chunk;
-      });
+      let body = '';
+      req.on('data', (chunk) => { body += chunk });
 
-      req.on("end", async () => {
+      req.on('end', async () => {
         try {
-          const data = JSON.parse(body);
           const filePath = join(GUESTS_DIR, `${guestName}.json`);
-          await writeFile(filePath, JSON.stringify(data, null, 2));
+          await mkdir(GUESTS_DIR, { recursive: true });
+          await writeFile(filePath, body, 'utf8');
           res.statusCode = 201;
-          res.end(JSON.stringify(data));
+          res.end(JSON.stringify({}));
         } catch {
           res.statusCode = 500;
-          res.end(JSON.stringify({ error: "server failed" }));
+          res.end(JSON.stringify({ error: 'server failed' }));
         }
       });
     } else {
