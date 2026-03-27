@@ -1,29 +1,34 @@
-let pronouns = ['i','you','he','she','it','they','we']
+const pronoms = ['i', 'you', 'he', 'she', 'it', 'they', 'we'];
 
-const words = (arr,ind) => {
-        if (!pronouns.includes(arr[ind]))
-            return arr[ind]
-        return ''
-}
-function splitString(input) {
-    return input.split(/[\s,]+/).map(word => word.trim()).filter(word => word !== '');
+function tokenizeWords(input) {
+    return input.split(/[\s,]+/).map(word => word.trim()).filter(Boolean);
 }
 
-function pronoun(string){
-    let arr = splitString(string)
-    let rtn = {}
-    for (let i = 0;i< arr.length;i++){
-        if (pronouns.includes(arr[i].toLowerCase())){
-            let wwor = words(arr,i+1)
-            if (!rtn[arr[i].toLowerCase()]) {
-                rtn[arr[i].toLowerCase()] = {word:[],count:1}
-                if (wwor != '' && wwor != undefined) rtn[arr[i].toLowerCase()].word.push(wwor)
-            }
-            else {
-                if (wwor != '') rtn[arr[i].toLowerCase()].word.push(wwor)
-                rtn[arr[i].toLowerCase()].count++
-            }
+const nextNonPronounWord = (tokens, index) => {
+    const candidate = tokens[index];
+    if (!candidate) return '';
+    return pronoms.includes(candidate.toLowerCase()) ? '' : candidate;
+};
+
+function pronoun(text) {
+    const tokens = tokenizeWords(text);
+    const result = {};
+
+    for (let idx = 0; idx < tokens.length; idx++) {
+        const token = tokens[idx];
+        const lower = token.toLowerCase();
+        if (!pronoms.includes(lower)) continue;
+
+        const nextWord = nextNonPronounWord(tokens, idx + 1);
+
+        if (!result[lower]) {
+            result[lower] = { word: [], count: 1 };
+            if (nextWord) result[lower].word.push(nextWord);
+        } else {
+            if (nextWord) result[lower].word.push(nextWord);
+            result[lower].count++;
         }
     }
-    return rtn
+
+    return result;
 }
