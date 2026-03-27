@@ -21,7 +21,6 @@ const server = http.createServer(async (req, res) => {
         try {
           const filePath = join(GUESTS_DIR, `${guestName}.json`);
 
-          // On écrit le body tel quel, sans JSON.parse
           await writeFile(filePath, body);
 
           res.statusCode = 201;
