@@ -20,7 +20,7 @@ for (let i = 0; i < files.length; i++) {
     continue;
   }
 
-  if (obj && obj.answer === 'YES') {
+  if (String(obj.answer).toLowerCase() === 'yes') {
     names.push(`${obj.lastname} ${obj.firstname}`);
   }
 }
