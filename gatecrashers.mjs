@@ -1,5 +1,5 @@
 import http from "node:http";
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
@@ -36,6 +36,7 @@ const server = http.createServer((req, res) => {
       try {
         const data = JSON.parse(body);
         const filePath = join(GUESTS_DIR, `${guestName}.json`);
+        await mkdir(GUESTS_DIR, { recursive: true });
         await writeFile(filePath, JSON.stringify(data, null, 2));
         res.statusCode = 200;
         res.end(JSON.stringify(data));
