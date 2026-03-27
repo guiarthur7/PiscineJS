@@ -34,16 +34,12 @@ const server = http.createServer((req, res) => {
 
     req.on("end", async () => {
       try {
-        let data = JSON.parse(body);
-        data = Object.fromEntries(
-          Object.entries(data).map(([k, v]) =>
-            typeof v === "string" ? [k, v.toLowerCase()] : [k, v]
-          )
-        );
+        const data = JSON.parse(body);
         const filePath = join(GUESTS_DIR, `${guestName}.json`);
         await mkdir(GUESTS_DIR, { recursive: true });
         await writeFile(filePath, JSON.stringify(data, null, 2));
         res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
         res.end(JSON.stringify(data));
       } catch {
         res.statusCode = 500;
