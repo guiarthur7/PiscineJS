@@ -10,6 +10,9 @@ export async function getJSON(path, params) {
 	}
 	const json = await response.json();
 	if ('data' in json) return json.data;
-	if (Object.prototype.hasOwnProperty.call(json, 'error')) throw new Error(json.error);
+	if (Object.prototype.hasOwnProperty.call(json, 'error')) {
+		if (json.error instanceof Error) throw json.error;
+		throw new Error(json.error);
+	}
 	return json;
 }
