@@ -1,7 +1,7 @@
 import { readdir, readFile } from "node:fs/promises";
 
 try {
-  const dirPath = process.argv[2];
+  const dirPath = process.argv[2] || ".";
   if (!dirPath) throw new Error("Please provide a directory path.");
 
   const files = await readdir(dirPath);
