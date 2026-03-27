@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 const first = process.argv[2] || '';
 let words = first.split(" ")
 let res = ""
