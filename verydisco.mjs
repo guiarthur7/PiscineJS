@@ -1,4 +1,4 @@
-const first = process.argv.slice(2).join(' ');
+const first = process.argv[2] || '';
 let words = first.split(" ")
 let res = ""
 for (let i = 0; i < words.length; i++) {
