@@ -1,5 +1,5 @@
 import http from "node:http";
-import { writeFile, mkdir } from "node:fs/promises";
+import { writeFile } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
@@ -9,14 +9,10 @@ const PASSWORD = "abracadabra";
 
 function isAuthorized(authHeader) {
   if (!authHeader || !authHeader.startsWith("Basic ")) return false;
-  try {
-    const base64Credentials = authHeader.split(" ")[1];
-    const credentials = Buffer.from(base64Credentials, "base64").toString("utf8");
-    const [username, password] = credentials.split(":");
-    return FRIENDS.includes(username) && password === PASSWORD;
-  } catch {
-    return false;
-  }
+  const base64Credentials = authHeader.split(" ")[1];
+  const credentials = Buffer.from(base64Credentials, "base64").toString("utf8");
+  const [username, password] = credentials.split(":");
+  return FRIENDS.includes(username) && password === PASSWORD;
 }
 
 const server = http.createServer((req, res) => {
@@ -41,9 +37,8 @@ const server = http.createServer((req, res) => {
 
   req.on("end", async () => {
     try {
-      await mkdir(GUESTS_DIR, { recursive: true });
-      const data = JSON.parse(body || "{}");
       const filePath = join(GUESTS_DIR, `${guestName}.json`);
+      const data = body ? JSON.parse(body) : {};
       
       await writeFile(filePath, JSON.stringify(data, null, 2));
 
@@ -53,11 +48,6 @@ const server = http.createServer((req, res) => {
       res.statusCode = 500;
       res.end(JSON.stringify({ error: "server failed" }));
     }
-  });
-
-  req.on("error", () => {
-    res.statusCode = 500;
-    res.end(JSON.stringify({ error: "server failed" }));
   });
 });
 
