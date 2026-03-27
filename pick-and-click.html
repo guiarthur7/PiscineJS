@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pick and Click - HSL Color Picker</title>
+    <link rel="stylesheet" href="pick-and-click.data.css" />
+</head>
+
+<body>
+    <svg id="crosshairs">
+        <line id="axisX" x1="0" y1="0" x2="0" y2="100%" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1" />
+        <line id="axisY" x1="0" y1="0" x2="100%" y2="0" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1" />
+    </svg>
+
+    <div class="hsl">hsl(0, 50%, 50%)</div>
+    <div class="hue text">Hue: 0</div>
+    <div class="luminosity text">Luminosity: 50</div>
+
+    <script src="pick-and-click.js"></script>
+</body>
+
+</html>
