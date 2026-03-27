@@ -1,39 +1,43 @@
-function replica(target, ...sources) {
-    function isPlainObject(v) {
-        return Object.prototype.toString.call(v) === '[object Object]';
-    }
 
-    function deepCopy(v) {
-        if (v === null || typeof v !== 'object') return v;
-        if (Array.isArray(v)) return v.map(deepCopy);
-        const o = {};
-        for (const k in v) if (Object.prototype.hasOwnProperty.call(v, k)) o[k] = deepCopy(v[k]);
-        return o;
-    }
+function fusion(obj1, obj2) {
+    const res = {}
+    const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)])
 
-    function merge(a, b) {
-        if (a === undefined) return deepCopy(b);
-        if (b === undefined) return deepCopy(a);
-        if (Array.isArray(a) && Array.isArray(b)) return deepCopy(a).concat(deepCopy(b));
-        if (isPlainObject(a) && isPlainObject(b)) {
-            const out = {};
-            for (const k in a) if (Object.prototype.hasOwnProperty.call(a, k)) out[k] = deepCopy(a[k]);
-            for (const k in b) {
-                if (!Object.prototype.hasOwnProperty.call(b, k)) continue;
-                if (Object.prototype.hasOwnProperty.call(out, k)) {
-                    out[k] = merge(out[k], b[k]);
-                } else {
-                    out[k] = deepCopy(b[k]);
+    keys.forEach(key => {
+        const vob1 = obj1[key]
+        const vob2 = obj2[key]
+        if (vob1 !== undefined && vob2 === undefined) {
+            res[key] = vob1
+        } else if (vob1 === undefined && vob2 !== undefined) {
+            res[key] = vob2
+        } else {
+            if (Array.isArray(vob1) && Array.isArray(vob2)) {
+                res[key] = vob1.concat(vob2)
+            } else if (typeof vob1 === 'string' && typeof vob2 === 'string') {
+                res[key] = `${vob1} ${vob2}`
+                console.log(res[key])
+            } else if (typeof vob1 === 'number' && typeof vob2 === 'number') {
+                res[key] = vob2
+            } else if (typeof vob1 === 'object' && typeof vob2 === 'object' && !Array.isArray(vob1) && !Array.isArray(vob2)) {
+                res[key] = fusion(vob1, vob2)
+            } else {
+                res[key] = vob2
+            }
+        }
+    })
+    return res
+}
+
+function replica(to, ...object) {
+    if (to === null || typeof to !== 'object') return to
+    for (const oneof of object) {
+        if (oneof !== null && typeof oneof === 'object') {
+            for (const key in oneof) {
+                if(typeof to === 'object' && typeof oneof === 'object') {
+                    to = fusion(to,oneof)
                 }
             }
-            return out;
         }
-        return deepCopy(b);
     }
-
-    let result = deepCopy(target);
-    for (const src of sources) {
-        result = merge(result, src);
-    }
-    return result;
+    return to
 }
