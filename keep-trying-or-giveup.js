@@ -8,11 +8,10 @@ export function retry(count, callback) {
 				lastError = err;
 			}
 		}
-		throw new Error('All retries failed');
+		throw lastError;
 	};
 }
 
-// timeout: exécute callback, rejette si délai dépassé
 export function timeout(delay, callback) {
 	return async function (...args) {
 		return Promise.race([
