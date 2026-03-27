@@ -15,3 +15,11 @@ function mapValues(obj, func) {
     }
     return res
 }
+
+function reduceValues(obj, func) {
+    let res = 0
+    for (const key in obj) {
+        res += func(obj[key], 0)
+    }
+    return res
+}
