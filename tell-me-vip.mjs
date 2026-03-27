@@ -25,8 +25,8 @@ for (let i = 0; i < files.length; i++) {
     if (hasNames) {
       names.push(`${obj.lastname || ''} ${obj.firstname || ''}`.trim());
     } else {
-      const fileBase = files[i].split('.')[0];
-      const parts = fileBase.split('_');
+      const file = files[i].split('.')[0];
+      const parts = file.split('_');
       const first = parts[0] || '';
       const last = parts[1] || '';
       const derived = (last + ' ' + first).trim();
