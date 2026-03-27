@@ -1,11 +1,13 @@
-const first = process.argv[2];
+const first = process.argv.slice(2).join(' ');
+console.log(first)
 let words = first.split(" ")
+console.log(words)
 let res = ""
 for (let i = 0; i < words.length; i++) {
     if (words[i].length%2 !== 0) {
-        res += words[i].slice((first.length/2) + 1) + first.slice(0, first.length/2 + 1)
+        res += words[i].slice((words[i].length/2) + 1) + words[i].slice(0, words[i].length/2 + 1) + " "
     } else {
-        res += words[i].slice((first.length/2)) + first.slice(0, first.length/2)
+        res += words[i].slice((words[i].length/2)) + words[i].slice(0, words[i].length/2) + " "
     }
-    console.log(res)
 }
+console.log(res)
