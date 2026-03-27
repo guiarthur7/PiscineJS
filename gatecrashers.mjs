@@ -3,7 +3,9 @@ import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
-const GUESTS_DIR = "./guests";
+
+// 🔥 IMPORTANT : utiliser le dossier courant du process
+const GUESTS_DIR = join(process.cwd(), "guests");
 
 const FRIENDS = ["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"];
 const PASSWORD = "abracadabra";
@@ -60,5 +62,5 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port 5000`);
 });
