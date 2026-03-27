@@ -1,4 +1,3 @@
-import fs from 'fs';
 const first = process.argv[2] || '';
 let words = first.split(" ")
 let res = ""
@@ -13,6 +12,4 @@ const output = res.trim();
 try {
     fs.writeFileSync('verydisco-forever.txt', output, 'utf8');
 } catch (err) {
-    // ignore write errors for now
 }
-console.log(output)
