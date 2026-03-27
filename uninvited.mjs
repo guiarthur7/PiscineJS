@@ -22,11 +22,12 @@ const server = http.createServer(async (req, res) => {
 
       req.on('end', async () => {
         try {
+          const parsed = JSON.parse(body);
           const filePath = join(GUESTS_DIR, `${guestName}.json`);
           await mkdir(GUESTS_DIR, { recursive: true });
-          await writeFile(filePath, body, 'utf8');
+          await writeFile(filePath, JSON.stringify(parsed, null, 2), 'utf8');
           res.statusCode = 201;
-          res.end(JSON.stringify({}));
+          res.end(JSON.stringify(parsed));
         } catch {
           res.statusCode = 500;
           res.end(JSON.stringify({ error: 'server failed' }));
