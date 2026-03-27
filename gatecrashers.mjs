@@ -3,7 +3,7 @@ import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
-const GUESTS_DIR = "./guests";
+const GUESTS_DIR = join(process.cwd(), "guests");
 const FRIENDS = ["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"];
 const PASSWORD = "abracadabra";
 
