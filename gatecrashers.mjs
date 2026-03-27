@@ -1,10 +1,6 @@
 import http from "node:http";
-import { writeFile, mkdir } from "node:fs/promises";
-import { join } from "node:path";
 
 const PORT = 5000;
-
-const GUESTS_DIR = join(process.cwd(), "guests");
 
 const FRIENDS = ["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"];
 const PASSWORD = "abracadabra";
@@ -29,22 +25,15 @@ const server = http.createServer((req, res) => {
       return;
     }
 
-    const guestName = req.url.slice(1);
     let body = "";
 
     req.on("data", (chunk) => {
       body += chunk;
     });
 
-    req.on("end", async () => {
+    req.on("end", () => {
       try {
         const data = JSON.parse(body);
-
-        await mkdir(GUESTS_DIR, { recursive: true });
-
-        const filePath = join(GUESTS_DIR, `${guestName}.json`);
-        await writeFile(filePath, JSON.stringify(data, null, 2));
-
         res.statusCode = 200;
         res.end(JSON.stringify(data));
       } catch {
@@ -58,6 +47,4 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+server.listen(PORT);
