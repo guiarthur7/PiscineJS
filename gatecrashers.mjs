@@ -1,5 +1,5 @@
 import http from "node:http";
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
@@ -19,7 +19,7 @@ function isAuthorized(authHeader) {
   return FRIENDS.includes(username) && password === PASSWORD;
 }
 
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   res.setHeader("Content-Type", "application/json");
 
   if (req.method !== "POST") {
@@ -44,6 +44,8 @@ const server = http.createServer((req, res) => {
   req.on("end", async () => {
     try {
       const data = JSON.parse(body);
+
+      await mkdir(GUESTS_DIR, { recursive: true });
 
       const filePath = join(GUESTS_DIR, `${guestName}.json`);
       await writeFile(filePath, JSON.stringify(data, null, 2));
