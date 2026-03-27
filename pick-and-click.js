@@ -1,69 +1,88 @@
-let currentHsl = '';
+let hslDiv = document.querySelector('.hsl');
+if (!hslDiv) {
+	hslDiv = document.createElement('div');
+	hslDiv.className = 'hsl';
+	document.body.appendChild(hslDiv);
+}
 
-document.addEventListener('mousemove', (e) => {
-    pick(e.clientX, e.clientY, window.innerWidth, window.innerHeight);
+let hueDiv = document.querySelector('.hue.text');
+if (!hueDiv) {
+	hueDiv = document.createElement('div');
+	hueDiv.className = 'hue text';
+	document.body.appendChild(hueDiv);
+}
+
+let luminosityDiv = document.querySelector('.luminosity.text');
+if (!luminosityDiv) {
+	luminosityDiv = document.createElement('div');
+	luminosityDiv.className = 'luminosity text';
+	document.body.appendChild(luminosityDiv);
+}
+
+let svg = document.querySelector('svg#crosshair');
+if (!svg) {
+	svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+	svg.id = 'crosshair';
+	svg.setAttribute('width', '100%');
+	svg.setAttribute('height', '100%');
+	svg.style.position = 'fixed';
+	svg.style.top = '0';
+	svg.style.left = '0';
+	svg.style.pointerEvents = 'none';
+
+	const axisX = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+	axisX.id = 'axisX';
+	axisX.setAttribute('x1', '0');
+	axisX.setAttribute('y1', '0');
+	axisX.setAttribute('x2', '0');
+	axisX.setAttribute('y2', '100%');
+	axisX.setAttribute('stroke', 'rgba(255, 255, 255, 0.5)');
+	axisX.setAttribute('stroke-width', '1');
+
+	const axisY = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    axisY.id = 'axisY';
+	axisY.setAttribute('x1', '0');
+	axisY.setAttribute('y1', '0');
+	axisY.setAttribute('x2', '100%');
+	axisY.setAttribute('y2', '0');
+	axisY.setAttribute('stroke', 'rgba(255, 255, 255, 0.5)');
+	axisY.setAttribute('stroke-width', '1');
+
+	svg.appendChild(axisX);
+	svg.appendChild(axisY);
+	document.body.appendChild(svg);
+}
+
+document.addEventListener('mousemove', (event) => {
+	const hue = Math.round((event.clientX / window.innerWidth) * 360);
+
+	const luminosity = Math.round(((window.innerHeight - event.clientY) / window.innerHeight) * 100);
+
+	const hslValue = `hsl(${hue}, 50%, ${luminosity}%)`;
+
+	document.body.style.background = hslValue;
+
+	hslDiv.textContent = hslValue;
+
+	hueDiv.textContent = `Hue: ${hue}`;
+
+	luminosityDiv.textContent = `Luminosity: ${luminosity}`;
+
+	const axisX = document.querySelector('#axisX');
+	if (axisX) {
+			axisX.setAttribute('x1', event.clientX);
+			axisX.setAttribute('x2', event.clientX);
+	}
+
+	const axisY = document.querySelector('#axisY');
+	if (axisY) {
+		axisY.setAttribute('y1', event.clientY);
+		axisY.setAttribute('y2', event.clientY);
+	}
 });
 
 document.addEventListener('click', () => {
-    if (!currentHsl) return;
-    navigator.clipboard.writeText(currentHsl).catch(() => {});
+	if (hslDiv && hslDiv.textContent) {
+		navigator.clipboard.writeText(hslDiv.textContent);
+	}
 });
-
-function pick(x, y, w, h) {
-    const svg = document.getElementById('crosshairs');
-    const axisX = document.getElementById('axisX');
-    const axisY = document.getElementById('axisY');
-
-    const hue = Math.round((x / w) * 360);
-    const luminosity = Math.round((y / h) * 100);
-
-    const hslStr = `hsl(${hue}, 50%, ${luminosity}%)`;
-    const s = 50 / 100;
-    const l = luminosity / 100;
-
-    function hslToRgb(h, s, l) {
-        const c = (1 - Math.abs(2 * l - 1)) * s;
-        const hh = h / 60;
-        const x = c * (1 - Math.abs((hh % 2) - 1));
-        let r1 = 0, g1 = 0, b1 = 0;
-        if (hh >= 0 && hh < 1) { r1 = c; g1 = x; b1 = 0; }
-        else if (hh >= 1 && hh < 2) { r1 = x; g1 = c; b1 = 0; }
-        else if (hh >= 2 && hh < 3) { r1 = 0; g1 = c; b1 = x; }
-        else if (hh >= 3 && hh < 4) { r1 = 0; g1 = x; b1 = c; }
-        else if (hh >= 4 && hh < 5) { r1 = x; g1 = 0; b1 = c; }
-        else { r1 = c; g1 = 0; b1 = x; }
-        const m = l - c / 2;
-        const r = Math.round((r1 + m) * 255);
-        const g = Math.round((g1 + m) * 255);
-        const b = Math.round((b1 + m) * 255);
-        return { r, g, b };
-    }
-
-    const { r, g, b } = hslToRgb(hue, s, l);
-    const rgbStr = `rgb(${r}, ${g}, ${b})`;
-
-    document.body.style.background = rgbStr;
-    currentHsl = rgbStr;
-
-    const hslDiv = document.querySelector('.hsl');
-    if (hslDiv) hslDiv.textContent = str;
-
-    const hueDiv = document.querySelector('.hue.text');
-    if (hueDiv) hueDiv.textContent = hue;
-
-    const lumDiv = document.querySelector('.luminosity.text');
-    if (lumDiv) lumDiv.textContent = luminosity;
-
-    if (axisX) {
-        axisX.setAttribute('x1', x);
-        axisX.setAttribute('x2', x);
-        axisX.setAttribute('y1', 0);
-        axisX.setAttribute('y2', h);
-    }
-    if (axisY) {
-        axisY.setAttribute('x1', 0);
-        axisY.setAttribute('x2', w);
-        axisY.setAttribute('y1', y);
-        axisY.setAttribute('y2', y);
-    }
-}
