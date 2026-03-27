@@ -8,56 +8,57 @@ const FRIENDS = ["Caleb_Squires", "Tyrique_Dalton", "Rahima_Young"];
 const PASSWORD = "abracadabra";
 
 function isAuthorized(authHeader) {
-  if (!authHeader || !authHeader.startsWith("Basic ")) {
-    return false;
-  }
-
+  if (!authHeader || !authHeader.startsWith("Basic ")) return false;
   try {
     const base64Credentials = authHeader.split(" ")[1];
     const credentials = Buffer.from(base64Credentials, "base64").toString("utf8");
     const [username, password] = credentials.split(":");
-
     return FRIENDS.includes(username) && password === PASSWORD;
-  } catch (e) {
+  } catch {
     return false;
   }
 }
 
-const server = http.createServer(async (req, res) => {
+const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "application/json");
 
-  if (req.method === "POST" && req.url.length > 1) {
-    if (!isAuthorized(req.headers.authorization)) {
-      res.statusCode = 401;
-      return res.end("Authorization Required");
+  if (req.method !== "POST") {
+    res.statusCode = 500;
+    return res.end(JSON.stringify({ error: "server failed" }));
+  }
+
+  if (!isAuthorized(req.headers.authorization)) {
+    res.statusCode = 401;
+    return res.end("Authorization Required");
+  }
+
+  const guestName = req.url.slice(1);
+  let body = "";
+
+  req.on("data", (chunk) => {
+    body += chunk;
+  });
+
+  req.on("end", async () => {
+    try {
+      await mkdir(GUESTS_DIR, { recursive: true });
+      const data = JSON.parse(body || "{}");
+      const filePath = join(GUESTS_DIR, `${guestName}.json`);
+      
+      await writeFile(filePath, JSON.stringify(data, null, 2));
+
+      res.statusCode = 200;
+      res.end(JSON.stringify(data));
+    } catch (err) {
+      res.statusCode = 500;
+      res.end(JSON.stringify({ error: "server failed" }));
     }
+  });
 
-    const guestName = req.url.slice(1);
-    let body = "";
-
-    req.on("data", (chunk) => {
-      body += chunk;
-    });
-
-    req.on("end", async () => {
-      try {
-        await mkdir(GUESTS_DIR, { recursive: true });
-        const data = JSON.parse(body);
-        const filePath = join(GUESTS_DIR, `${guestName}.json`);
-        
-        await writeFile(filePath, JSON.stringify(data, null, 2));
-
-        res.statusCode = 200;
-        res.end(JSON.stringify(data));
-      } catch (err) {
-        res.statusCode = 500;
-        res.end(JSON.stringify({ error: "server failed" }));
-      }
-    });
-  } else {
+  req.on("error", () => {
     res.statusCode = 500;
     res.end(JSON.stringify({ error: "server failed" }));
-  }
+  });
 });
 
 server.listen(PORT, () => {
