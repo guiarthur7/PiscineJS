@@ -22,6 +22,7 @@ const server = http.createServer((req, res) => {
     if (!isAuthorized(req.headers.authorization)) {
       res.statusCode = 401;
       res.end("Authorization Required");
+      server.close();
       return;
     }
 
@@ -40,10 +41,12 @@ const server = http.createServer((req, res) => {
         res.statusCode = 500;
         res.end(JSON.stringify({ error: "server failed" }));
       }
+      server.close(); 
     });
   } else {
     res.statusCode = 500;
     res.end(JSON.stringify({ error: "server failed" }));
+    server.close();
   }
 });
 
