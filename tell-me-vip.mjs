@@ -21,7 +21,17 @@ for (let i = 0; i < files.length; i++) {
   }
 
   if (String(obj.answer).toLowerCase() === 'yes') {
-    names.push(`${obj.lastname} ${obj.firstname}`);
+    const hasNames = obj.firstname || obj.lastname;
+    if (hasNames) {
+      names.push(`${obj.lastname || ''} ${obj.firstname || ''}`.trim());
+    } else {
+      const fileBase = files[i].split('.')[0];
+      const parts = fileBase.split('_');
+      const first = parts[0] || '';
+      const last = parts[1] || '';
+      const derived = (last + ' ' + first).trim();
+      if (derived) names.push(derived);
+    }
   }
 }
 
@@ -29,3 +39,4 @@ names.sort((a, b) => a.localeCompare(b, 'en'));
 
 const out = names.map((n, i) => `${i + 1}. ${n}`).join('\n');
 writeFileSync('vip.txt', out, 'utf8');
+if (out.length) process.stdout.write(out);
