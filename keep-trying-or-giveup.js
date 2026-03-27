@@ -1,7 +1,7 @@
-function retry() {
+function retry(count, callback) {
 
 }
 
-function timeout() {
+function timeout(delay, callback) {
     
 }
