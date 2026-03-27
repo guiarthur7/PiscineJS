@@ -46,8 +46,8 @@ const nutritionDB = {
 
 function totalCalories(obj) {
     return reduceEntries(obj, (acc, [name, grams]) => {
-        const per100 = nutritionDB[name].calories
-        return Math.round((acc + per100 * (grams / 100))*10) /10;
+        const per100 = (nutritionDB[name] && nutritionDB[name].calories) || 0;
+        return acc + per100 * (grams / 100);
     }, 0);
 }
 
@@ -62,12 +62,13 @@ function lowCarbs(obj) {
 function cartTotal(obj) {
     return mapEntries(obj, ([name, grams]) => {
         let res = {}
-        res["calories"] = Math.round(nutritionDB[name].calories *(grams/100))
-        res["protein"] = Math.round(nutritionDB[name].protein *(grams/100))
-        res["carbs"] = Math.round(nutritionDB[name].carbs *(grams/100))
-        res["sugar"] = Math.round(nutritionDB[name].sugar *(grams/100))
-        res["fiber"] = Math.round(nutritionDB[name].fiber *(grams/100))
-        res["fat"] = Math.round(nutritionDB[name].fat *(grams/100))
+        const per = nutritionDB[name] || { calories: 0, protein: 0, carbs: 0, sugar: 0, fiber: 0, fat: 0 };
+        res["calories"] = per.calories * (grams / 100);
+        res["protein"] = per.protein * (grams / 100);
+        res["carbs"] = per.carbs * (grams / 100);
+        res["sugar"] = per.sugar * (grams / 100);
+        res["fiber"] = per.fiber * (grams / 100);
+        res["fat"] = per.fat * (grams / 100);
 
         return [name, res]
     })
