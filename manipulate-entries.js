@@ -62,13 +62,22 @@ function lowCarbs(obj) {
 function cartTotal(obj) {
     return mapEntries(obj, ([name, grams]) => {
         let res = {}
-        res[calories] = nutritionDB[name].calories *(grams/100)
-        res[protein] = nutritionDB[name].protein *(grams/100)
-        res[carbs] = nutritionDB[name].carbs *(grams/100)
-        res[sugar] = nutritionDB[name].sugar *(grams/100)
-        res[fiber] = nutritionDB[name].fiber *(grams/100)
-        res[fat] = nutritionDB[name].fat *(grams/100)
+        res["calories"] = Math.round(nutritionDB[name].calories *(grams/100))
+        res["protein"] = Math.round(nutritionDB[name].protein *(grams/100))
+        res["carbs"] = Math.round(nutritionDB[name].carbs *(grams/100))
+        res["sugar"] = Math.round(nutritionDB[name].sugar *(grams/100))
+        res["fiber"] = Math.round(nutritionDB[name].fiber *(grams/100))
+        res["fat"] = Math.round(nutritionDB[name].fat *(grams/100))
 
         return [name, res]
     })
 }
+
+const groceriesCart = { orange: 500, oil: 20, sugar: 480 };
+
+console.log("Total calories:");
+console.log(totalCalories(groceriesCart));
+console.log("Items with low carbs:");
+console.log(lowCarbs(groceriesCart));
+console.log("Total cart nutritional facts:");
+console.log(cartTotal(groceriesCart));
