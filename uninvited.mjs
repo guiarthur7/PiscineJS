@@ -1,5 +1,5 @@
 import http from "node:http";
-import { writeFile } from "node:fs/promises";
+import { writeFile, mkdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const PORT = 5000;
@@ -9,10 +9,14 @@ const PASSWORD = "abracadabra";
 
 function isAuthorized(authHeader) {
   if (!authHeader || !authHeader.startsWith("Basic ")) return false;
-  const base64 = authHeader.split(" ")[1];
-  const decoded = Buffer.from(base64, "base64").toString("utf8");
-  const [user, pass] = decoded.split(":");
-  return FRIENDS.includes(user) && pass === PASSWORD;
+  try {
+    const base64Credentials = authHeader.split(" ")[1];
+    const credentials = Buffer.from(base64Credentials, "base64").toString("utf8");
+    const [username, password] = credentials.split(":");
+    return FRIENDS.includes(username) && password === PASSWORD;
+  } catch {
+    return false;
+  }
 }
 
 const server = http.createServer((req, res) => {
@@ -28,7 +32,7 @@ const server = http.createServer((req, res) => {
     return res.end("Authorization Required");
   }
 
-  const guestName = req.url.split('?')[0].slice(1);
+  const guestName = req.url.slice(1);
   let body = "";
 
   req.on("data", (chunk) => {
@@ -37,8 +41,15 @@ const server = http.createServer((req, res) => {
 
   req.on("end", async () => {
     try {
+      if (!guestName) {
+        res.statusCode = 500;
+        return res.end(JSON.stringify({ error: "server failed" }));
+      }
+
+      await mkdir(GUESTS_DIR, { recursive: true });
+
+      const data = JSON.parse(body || "{}");
       const filePath = join(GUESTS_DIR, `${guestName}.json`);
-      const data = JSON.parse(body);
       
       await writeFile(filePath, JSON.stringify(data, null, 2));
 
@@ -48,6 +59,11 @@ const server = http.createServer((req, res) => {
       res.statusCode = 500;
       res.end(JSON.stringify({ error: "server failed" }));
     }
+  });
+
+  req.on("error", () => {
+    res.statusCode = 500;
+    res.end(JSON.stringify({ error: "server failed" }));
   });
 });
 
