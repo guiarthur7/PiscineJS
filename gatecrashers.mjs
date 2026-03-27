@@ -43,12 +43,13 @@ const server = http.createServer((req, res) => {
 
   req.on("end", async () => {
     try {
-      const filePath = join(GUESTS_DIR, `${guestName}.json`);
+      const data = JSON.parse(body);
 
-      await writeFile(filePath, body);
+      const filePath = join(GUESTS_DIR, `${guestName}.json`);
+      await writeFile(filePath, JSON.stringify(data, null, 2));
 
       res.statusCode = 200;
-      res.end(body);
+      res.end(JSON.stringify(data));
     } catch {
       res.statusCode = 500;
       res.end(JSON.stringify({ error: "server failed" }));
