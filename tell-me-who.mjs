@@ -13,5 +13,6 @@ for (const f of files) {
     names.push(base);
   }
 }
+names.sort((a, b) => a.localeCompare(b, 'en'));
 
 names.forEach((n, i) => console.log(`${i + 1}. ${n}`));
