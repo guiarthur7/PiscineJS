@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <svg id="crosshairs">
+    <svg id="crosshair">
         <line id="axisX" x1="0" y1="0" x2="0" y2="100%" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1" />
         <line id="axisY" x1="0" y1="0" x2="100%" y2="0" stroke="rgba(255, 255, 255, 0.5)" stroke-width="1" />
     </svg>
@@ -18,7 +18,10 @@
     <div class="hue text">Hue: 0</div>
     <div class="luminosity text">Luminosity: 50</div>
 
-    <script src="pick-and-click.js"></script>
+    <script type="module">
+        import { pick } from './pick-and-click.js';
+        pick();
+    </script>
 </body>
 
 </html>
