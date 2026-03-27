@@ -20,7 +20,7 @@ for (let i = 0; i < files.length; i++) {
     continue;
   }
 
-  if (obj && typeof obj.answer === 'string' && obj.answer.toLowerCase() === 'yes') {
+  if (obj && obj.answer === 'YES') {
     names.push(`${obj.lastname} ${obj.firstname}`);
   }
 }
@@ -29,4 +29,4 @@ names.sort((a, b) => a.localeCompare(b, 'en'));
 
 const out = names.map((n, i) => `${i + 1}. ${n}`).join('\n');
 writeFileSync('vip.txt', out, 'utf8');
-console.log(out)
+console.log(out);
