@@ -1,4 +1,4 @@
-# � PiscineJS
+# 🐠 PiscineJS
 
 ## 📚 Catégories d'exercices
 
